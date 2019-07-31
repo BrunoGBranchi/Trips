@@ -29,7 +29,7 @@ web.ignoring().antMatchers("/usuarios/**");
 		http.csrf().disable(); // TODO remover
 		http
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
+				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/usuarios/**").permitAll()
 				.antMatchers("/vendas/relatorios/equipe").hasRole("VISUALIZAR_RELATORIO_EQUIPE")
 				.antMatchers("/vendas/relatorios/custos").hasRole("VISUALIZAR_RELATORIO_CUSTOS")
 				.anyRequest().authenticated()
@@ -49,5 +49,4 @@ web.ignoring().antMatchers("/usuarios/**");
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManagerBean();
     }
-	
 }
