@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.trips.model.Grupo;
 import br.com.trips.model.Permissao;
+import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
 import br.com.trips.repository.GrupoRepository;
 import br.com.trips.repository.PermissaoRepository;
@@ -25,12 +26,7 @@ public class SSUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UsuarioRepository usuarios;
 
-	@Autowired
-	private GrupoRepository grupos;
 	
-	@Autowired
-	private PermissaoRepository permissoes;
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarios.findByLogin(username);
@@ -43,20 +39,12 @@ public class SSUserDetailsService implements UserDetailsService {
 	}
 	
 	public Collection<? extends GrantedAuthority> authorities(Usuario usuario) {
-		return authorities(grupos.findByUsuariosIn(usuario));
-	}
-	
-	public Collection<? extends GrantedAuthority> authorities(List<Grupo> grupos) {
 		Collection<GrantedAuthority> auths = new ArrayList<>();
 		
-		for (Grupo grupo: grupos) {
-			List<Permissao> lista = permissoes.findByGruposIn(grupo);
-			
-			for (Permissao permissao: lista) {
-				auths.add(new SimpleGrantedAuthority("ROLE_" + permissao.getNome()));
-			}
+		for (Roles role : usuario.getRoles()) {
+			auths.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
 		}
-		
 		return auths;
 	}
+	
 }

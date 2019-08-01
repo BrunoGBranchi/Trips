@@ -27,14 +27,14 @@ web.ignoring().antMatchers("/usuarios/**");
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable(); // TODO remover
+		http.authorizeRequests().antMatchers("/usuarios/cadastro").anonymous();
 		http
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/usuarios/**").permitAll()
-				.antMatchers("/vendas/relatorios/equipe").hasRole("VISUALIZAR_RELATORIO_EQUIPE")
-				.antMatchers("/vendas/relatorios/custos").hasRole("VISUALIZAR_RELATORIO_CUSTOS")
+				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
+				.antMatchers("/admin/**").hasRole("ROLE_ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
-			.formLogin().permitAll();
+			.formLogin().loginPage("/login").permitAll();
 	}
 	
 	@Override

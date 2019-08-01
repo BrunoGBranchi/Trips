@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -26,11 +26,9 @@ public class Usuario implements Serializable {
 	
 	private boolean ativo;
 	
-	@ManyToMany
-	private List<Grupo> grupos;
-	
-	@ManyToMany
-	private List<Permissao> permissoes;
+	//Pesquisar
+	@OneToMany
+	List<Roles> roles;
 
 	public Long getId() {
 		return id;
@@ -42,6 +40,9 @@ public class Usuario implements Serializable {
 
 	public String getNome() {
 		return nome;
+	}
+	public List<Roles> getRoles() {
+		return roles;
 	}
 
 	public void setNome(String nome) {
@@ -72,22 +73,7 @@ public class Usuario implements Serializable {
 		this.ativo = ativo;
 	}
 	
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
 	
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-	
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
-
-	public void setPermissoes(List<Permissao> permissoes) {
-		this.permissoes = permissoes;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

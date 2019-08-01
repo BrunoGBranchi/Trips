@@ -39,8 +39,6 @@ public class UsuarioController {
 	@RequestMapping(path = "/enviar", method = RequestMethod.POST)
 	public String salvar(Model model, Usuario usuario) {
 		//TODO Setar grupo de usuario novo;
-		//Set<Grupo> grupo = new HashSet<Grupo>();
-		//usuario.setGrupos(grupo);
 		usuarioDao.saveAndFlush(usuario);
 		model.addAttribute("usuarios", usuarioDao.findAll());
 		return "redirect:/login/entrar";
