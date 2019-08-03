@@ -1,8 +1,7 @@
 package br.com.trips.controller;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.trips.model.Grupo;
+import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
-import br.com.trips.repository.GrupoRepository;
 import br.com.trips.repository.UsuarioRepository;
 
 @Controller
@@ -21,9 +19,6 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioDao;
-	
-	@Autowired
-	private GrupoRepository grupoDao;
 	
 	@RequestMapping(path= {"/cadastro", "/", ""})
 	public String cadastro() {
@@ -39,8 +34,13 @@ public class UsuarioController {
 	@RequestMapping(path = "/enviar", method = RequestMethod.POST)
 	public String salvar(Model model, Usuario usuario) {
 		//TODO Setar grupo de usuario novo;
-		usuarioDao.saveAndFlush(usuario);
+		List<Roles> roles = new ArrayList<Roles>();
+		roles.add(Roles.ADM_SISTEMA);
+		usuario.setRoles(roles);
+		usuario.setAtivo(true);
+		usuario.criptografarSenha();
+		usuarioDao.save(usuario);
 		model.addAttribute("usuarios", usuarioDao.findAll());
-		return "redirect:/login/entrar";
+		return "redirect:/login";
 	}
 }

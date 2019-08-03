@@ -12,12 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import br.com.trips.model.Grupo;
-import br.com.trips.model.Permissao;
 import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
-import br.com.trips.repository.GrupoRepository;
-import br.com.trips.repository.PermissaoRepository;
 import br.com.trips.repository.UsuarioRepository;
 
 @Component

@@ -26,15 +26,15 @@ web.ignoring().antMatchers("/usuarios/**");
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // TODO remover
+		//http.csrf().disable(); // TODO remover
 		http.authorizeRequests().antMatchers("/usuarios/cadastro").anonymous();
 		http
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
-				.antMatchers("/admin/**").hasRole("ROLE_ADM_SISTEMA")
+				.antMatchers("/public/**","/resources/**", "/webjars/**", "/facebook/**", "/usuarios/cadastro/**").permitAll()
+				.antMatchers("/admin/**").hasRole("ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login").permitAll();
+			.formLogin().loginPage("/login/entrar").permitAll();
 	}
 	
 	@Override

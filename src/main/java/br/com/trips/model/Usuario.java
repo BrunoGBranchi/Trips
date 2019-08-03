@@ -3,11 +3,17 @@ package br.com.trips.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario implements Serializable {
@@ -27,9 +33,21 @@ public class Usuario implements Serializable {
 	private boolean ativo;
 	
 	//Pesquisar
-	@OneToMany
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Roles.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "usuario_roles")
+    @Column(name = "role")
 	List<Roles> roles;
-
+	
+	public void criptografarSenha() {
+		if (this.login != null && senha != null) {
+			if (senha.length() < 40) {
+				this.senha = new BCryptPasswordEncoder().encode(this.login);
+			}
+		}
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,6 +61,10 @@ public class Usuario implements Serializable {
 	}
 	public List<Roles> getRoles() {
 		return roles;
+	}
+	
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
 
 	public void setNome(String nome) {
