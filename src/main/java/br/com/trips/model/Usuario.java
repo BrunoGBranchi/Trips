@@ -41,9 +41,7 @@ public class Usuario implements Serializable {
 	
 	public void criptografarSenha() {
 		if (this.login != null && senha != null) {
-			if (senha.length() < 40) {
-				this.senha = new BCryptPasswordEncoder().encode(this.login);
-			}
+				this.senha = new BCryptPasswordEncoder().encode(this.senha);
 		}
 	}
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -42,5 +43,15 @@ public class UsuarioController {
 		usuarioDao.save(usuario);
 		model.addAttribute("usuarios", usuarioDao.findAll());
 		return "redirect:/login";
+	}
+	
+	@RequestMapping(path = "/excluir/{codigo}")
+	public String excluir(@PathVariable(value = "id") Long id, Usuario usuario) {
+		List<Roles> roles = new ArrayList<Roles>();
+		roles.remove(Roles.ADM_SISTEMA);
+		usuario.setRoles(roles);
+		usuarioDao.deleteById(id);
+		return "redirect:/index/index";
+
 	}
 }

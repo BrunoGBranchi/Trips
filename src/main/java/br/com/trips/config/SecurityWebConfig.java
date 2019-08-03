@@ -21,20 +21,19 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		
-web.ignoring().antMatchers("/usuarios/**");
+		web.ignoring().antMatchers("/usuarios/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//http.csrf().disable(); // TODO remover
-		http.authorizeRequests().antMatchers("/usuarios/cadastro").anonymous();
 		http
 			.authorizeRequests()
-				.antMatchers("/public/**","/resources/**", "/webjars/**", "/facebook/**", "/usuarios/cadastro/**").permitAll()
+				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
 				.antMatchers("/admin/**").hasRole("ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login/entrar").permitAll();
+			.formLogin().loginPage("/login").permitAll();
 	}
 	
 	@Override
@@ -49,4 +48,9 @@ web.ignoring().antMatchers("/usuarios/**");
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManagerBean();
     }
+	
+    public static void main(String[] args) {
+		System.out.println(new BCryptPasswordEncoder().encode("123"));
+	}
+    
 }
