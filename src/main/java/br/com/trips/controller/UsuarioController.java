@@ -45,9 +45,9 @@ public class UsuarioController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping(path = "/excluir/{codigo}")
+	@RequestMapping(path = "/excluir/{id}")
 	public String excluir(@PathVariable(value = "id") Long id, Usuario usuario) {
-		List<Roles> roles = new ArrayList<Roles>();
+		List<Roles> roles = new ArrayList<Roles>(usuario.getRoles());
 		roles.remove(Roles.ADM_SISTEMA);
 		usuario.setRoles(roles);
 		usuarioDao.deleteById(id);
