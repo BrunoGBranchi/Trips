@@ -30,7 +30,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
-				.antMatchers("/admin/**").hasRole("ADM_SISTEMA")
+				.antMatchers("/index/**").hasRole("ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").permitAll();

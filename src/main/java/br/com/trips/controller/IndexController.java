@@ -20,8 +20,7 @@ public class IndexController {
 	
 	@RequestMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
-		//System.out.println(auth.get);
-		model.addAttribute("usuario", usuarioDao.findByLogin(principal.getName()));
+		model.addAttribute("IDusuario", usuarioDao.findByLogin(principal.getName()));
 		return "index/index";
 	}
 	
