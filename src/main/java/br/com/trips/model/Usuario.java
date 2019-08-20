@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -44,7 +44,6 @@ public class Usuario implements Serializable {
 				this.senha = new BCryptPasswordEncoder().encode(this.senha);
 		}
 	}
-	
 	
 	public Long getId() {
 		return id;

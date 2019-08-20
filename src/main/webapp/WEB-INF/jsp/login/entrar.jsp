@@ -42,21 +42,10 @@
 				id="open_forgotPassword">Esqueci a senha</a>
 		</div>
 		<div class="text-center">
-			Sou novo aqui<a href='<c:url value="usuarios/cadastro"></c:url>' >Registrar</a>
+			Sou novo aqui<a href='<c:url value="usuarios/cadastro"></c:url>' > Registrar</a>
 		</div>
 	</div>
 
-
-<!-- 
-	<form name='login' action="/login" method="POST">
-		<label>Usuario:</label> <input type='text' name='username' value=''
-			autofocus required> <label>Senha:</label> <input
-			type='password' name='password' required />
-		<button type="submit">Entrar</button>
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
-	 -->
 </body>
 <script type="text/javascript" src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>

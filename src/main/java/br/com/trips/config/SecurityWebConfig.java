@@ -29,7 +29,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 		//http.csrf().disable(); // TODO remover
 		http
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/facebook/**").permitAll()
+				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/login**").permitAll()
 				.antMatchers("/index/**").hasRole("ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
