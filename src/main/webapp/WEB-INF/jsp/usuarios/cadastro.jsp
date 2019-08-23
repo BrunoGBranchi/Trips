@@ -32,8 +32,37 @@
 
 				<h2>Cadastrar Usuario</h2>
 				<br>
-				<form class="form-horizontal"
+				<form name="f1" id="f1" class="form-horizontal"
 					action='<c:url value="/usuarios/enviar"></c:url>' method="post">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">E-mail: </label>
+						<div class="col-sm-10">
+							<input class="form-control" type="text" name="login"
+								onblur="validacaoEmail(f1.email)"
+								placeholder="exemplo@exemplo.com.br" required  autofocus/>
+							<div id="msgemail"></div>
+						</div>
+					</div>
+					<br>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Senha: </label>
+						<div class="col-sm-10">
+							<input class="form-control" type="password" name="senha"
+								placeholder="Senha" required onClick="verificaSenha()" />
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Confrimar senha: </label>
+						<div class="col-sm-10">
+							<input class="form-control" type="password" name="confirmaSenha"
+								placeholder="Confirmar senha" required onClick="verificaSenha()" />
+							<div id="msgsenha"></div>
+						</div>
+					</div>
+					<br>
 
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Nome: </label>
@@ -44,42 +73,6 @@
 					</div>
 					<br>
 
-
-					<div class="form-group">
-						<label class="col-sm-2 control-label">E-mail: </label>
-						<div class="col-sm-10">
-							<input class="form-control" type="text" name="email"
-								placeholder="exemplo@exemplo.com.br" required />
-						</div>
-					</div>
-					<br>
-
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Usuario: </label>
-						<div class="col-sm-10">
-							<input class="form-control" type="text" name="login"
-								placeholder="Usuario para login" required />
-						</div>
-					</div>
-
-					<br>
-
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Senha: </label>
-						<div class="col-sm-10">
-							<input class="form-control" type="password" name="senha"
-								placeholder="Senha" required />
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Confrimar senha: </label>
-						<div class="col-sm-10">
-							<input class="form-control" type="password" name="confirmaSenha"
-								placeholder="Confirmar senha" required />
-						</div>
-					</div>
-					<br>
 
 					<div class="form-group">
 						<label class="col-sm-2 control-label">CPF: </label>
@@ -98,7 +91,41 @@
 						</div>
 					</div>
 					<br>
-
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Orgão emissor: </label>
+						<div class="col-sm-10">
+							<input class="form-control" type="text" name="emissor"
+								placeholder="SSPSC" required />
+						</div>
+					</div>
+					<br>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Estado: </label>
+						<div class="col-sm-10">
+							<select class="form-control" type="text" name="uf" required></select>
+						</div>
+					</div>
+					<br>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Cidade: </label>
+						<div class="col-sm-10">
+							<select class="form-control" type="text" name="cidade" required></select>
+						</div>
+					</div>
+					<br>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">CEP: </label>
+						<div class="col-sm-10">
+							<input class="form-control" type="text" name="cep"
+								placeholder="Av. Brasil" required />
+						</div>
+					</div>
+					<br>
+					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Endereço: </label>
 						<div class="col-sm-10">
@@ -122,9 +149,7 @@
 								placeholder="Casa/Ap 101" required />
 						</div>
 					</div>
-					<br> 
-					
-					<input type="hidden" name="${_csrf.parameterName}"
+					<br> <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="form-group">
 						<button class="btn btn-success" type="submit">Cadastrar</button>
@@ -135,4 +160,36 @@
 	</div>
 
 </body>
+<script language="Javascript">
+	function validacaoEmail(field) {
+		usuario = field.value.substring(0, field.value.indexOf("@"));
+		dominio = field.value.substring(field.value.indexOf("@") + 1,
+				field.value.length);
+
+		if ((usuario.length >= 1) && (dominio.length >= 3)
+				&& (usuario.search("@") == -1) && (dominio.search("@") == -1)
+				&& (usuario.search(" ") == -1) && (dominio.search(" ") == -1)
+				&& (dominio.search(".") != -1) && (dominio.indexOf(".") >= 1)
+				&& (dominio.lastIndexOf(".") < dominio.length - 1)) {
+			document.getElementById("msgemail").innerHTML = "<font color='green'>E-mail válido </font>";
+		} else {
+			document.getElementById("msgemail").innerHTML = "<font color='red'>E-mail inválido </font>";
+		}
+	}
+
+	function verificaSenha() {
+		senha = document.f1.senha.value;
+		confirmaSenha = document.f1.confirmaSenha.value;
+		if (senha == null && confirmarSenha == null) {
+			document.getElementById("msgsenha").innerHTML = "<font color='red'>Os campos de senha não podem ficar vazios </font>";
+		} else {
+			if (senha != confirmaSenha && senha != null && confirmaSenha != null) {
+				document.getElementById("msgsenha").innerHTML = "<font color='red'>As senhas não coincidem </font>";
+			} else {
+				document.getElementById("msgsenha").innerHTML = "<font color='green'>As senhas coincidem </font>";
+			}
+		}
+	}
+</script>
+
 </html>

@@ -16,35 +16,40 @@ import javax.persistence.Id;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-public class Usuario extends Pessoa implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String nome;
-	
 	private String login;
-	
 	private String senha;
-	
+	private String cpf;
+	private String rg;
+	private String emissor;
+	private String uf;
+	private String cidade;
+	private String cep;
+	private String endereco;
+	private String numero;
+	private String complemento;
 	private boolean ativo;
-	
-	//Pesquisar
+
+	// Pesquisar
 	@ElementCollection(fetch = FetchType.EAGER, targetClass = Roles.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "usuario_roles")
-    @Column(name = "role")
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "usuario_roles")
+	@Column(name = "role")
 	List<Roles> roles;
-	
+
 	public void criptografarSenha() {
 		if (this.login != null && senha != null) {
-				this.senha = new BCryptPasswordEncoder().encode(this.senha);
+			this.senha = new BCryptPasswordEncoder().encode(this.senha);
 		}
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -56,10 +61,11 @@ public class Usuario extends Pessoa implements Serializable {
 	public String getNome() {
 		return nome;
 	}
+
 	public List<Roles> getRoles() {
 		return roles;
 	}
-	
+
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
@@ -83,16 +89,87 @@ public class Usuario extends Pessoa implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getEmissor() {
+		return emissor;
+	}
+
+	public void setEmissor(String emissor) {
+		this.emissor = emissor;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
 	public boolean isAtivo() {
 		return ativo;
 	}
-	
+
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

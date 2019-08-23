@@ -25,7 +25,7 @@
 		<!--<form accept-charset="utf-8" method="post" action="">-->
 		<form name='login' action="/login" method="POST">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Usuario"
+				<input type="text" class="form-control" placeholder="exemplo@exemplo.com.br"
 					name="username" autofocus required>
 			</div>
 			<div class="form-group">
