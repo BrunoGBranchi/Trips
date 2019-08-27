@@ -1,6 +1,7 @@
 package br.com.trips.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -13,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -26,6 +29,8 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String login;
 	private String senha;
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	private Date data_nascimento;
 	private String cpf;
 	private String rg;
 	private String emissor;
@@ -62,14 +67,6 @@ public class Usuario implements Serializable {
 		return nome;
 	}
 
-	public List<Roles> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Roles> roles) {
-		this.roles = roles;
-	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -88,6 +85,14 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Date getData_nascimento() {
+		return data_nascimento;
+	}
+
+	public void setData_nascimento(Date data_nascimento) {
+		this.data_nascimento = data_nascimento;
 	}
 
 	public String getCpf() {
@@ -168,6 +173,14 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
 
 	@Override

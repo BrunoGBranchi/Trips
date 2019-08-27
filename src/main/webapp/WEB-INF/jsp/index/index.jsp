@@ -17,6 +17,7 @@
 <title>Trips - Bem-Vindo!</title>
 </head>
 <body>
+<c:import url="../headers/header.jsp"></c:import>
 <div class="container">
 	<p>
 	<sec:authorize access="isAuthenticated()">
