@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -47,12 +45,11 @@
 										</div>
 										<div class="col-xl-12">
 											<p class="text-center">
-												<strong> <sec:authorize access="isAuthenticated()">
-														<sec:authentication property="name" />
-													</sec:authorize>
-												</strong>
+												<strong>${IDusuario.nome}</strong>
 											</p>
-											<p class="text-center small">email@email.com</p>
+											<p class="text-center small"><sec:authorize access="isAuthenticated()">
+														<sec:authentication property="name" />
+													</sec:authorize></p>
 											</p>
 										</div>
 									</div>
@@ -68,11 +65,12 @@
 													class="fas fa-cog"></i></a>
 										</div>
 										<div class="col px-md-5">
-											<form action="/logout"></form>
+											<form action="/logout">
 											<p>
-												<a type="submit" class="btn btn-danger"><i
-													class="fas fa-sign-out-alt"></i></a>
+												<button class="btn btn-danger"><i
+													class="fas fa-sign-out-alt"></i></button>
 											</p>
+											</form>
 										</div>
 									</div>
 								</div>

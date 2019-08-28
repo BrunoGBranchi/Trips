@@ -26,11 +26,11 @@
 		<form name='login' action="/login" method="POST">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="exemplo@exemplo.com.br"
-					name="username" autofocus required>
+					name="username" autofocus required value="branchibruno@gmail.com">
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" placeholder="Senha"
-					name="password" required>
+					name="password" required value="123456">
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
