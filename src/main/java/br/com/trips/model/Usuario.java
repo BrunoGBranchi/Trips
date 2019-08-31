@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,14 +42,16 @@ public class Usuario implements Serializable {
 	private String numero;
 	private String complemento;
 	private boolean ativo;
-
-	// Pesquisar
+	
 	@ElementCollection(fetch = FetchType.EAGER, targetClass = Roles.class)
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "usuario_roles")
 	@Column(name = "role")
 	List<Roles> roles;
-
+	
+	@OneToMany
+	List<Imagens> imgPerfil;
+	
 	public void criptografarSenha() {
 		if (this.login != null && senha != null) {
 			this.senha = new BCryptPasswordEncoder().encode(this.senha);
@@ -181,6 +184,14 @@ public class Usuario implements Serializable {
 
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
+	}
+	
+	public List<Imagens> getImgPerfil() {
+		return imgPerfil;
+	}
+
+	public void setImgPerfil(List<Imagens> imgPerfil) {
+		this.imgPerfil = imgPerfil;
 	}
 
 	@Override

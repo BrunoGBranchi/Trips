@@ -18,7 +18,7 @@
 </head>
 <body>
 <c:import url="../headers/header.jsp"></c:import>
-<div style="margin-top: 30px;" class="container">
+<div style="margin-top: 50px;" class="container">
 	<p>
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="name" />

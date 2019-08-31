@@ -6,79 +6,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>" rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>"
+	rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet"
+	type="text/css">
 
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-	<div class="navbar navbar-light bg-light fixed-top navbar-expand-md"
-		role="navigation">
-		<div class="container">
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target=".navbar-collapse">&#x2630;</button>
-			<a target="_blank" href="#" class="navbar-brand">Trips.</a>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
-				</ul>
-				<ul class="nav navbar-nav ml-auto">
-					<li class="dropdown nav-item"><a href="#"
-						class="dropdown-toggle nav-link" data-toggle="dropdown"> <span
-							class="glyphicon glyphicon-user"></span>&#xA0; <strong>Perfil</strong>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-							<span class="glyphicon glyphicon-chevron-down"></span>
-
-					</a>
-						<ul class="dropdown-menu bg-light">
-							<li class="dropdown-item">
-								<div class="navbar-login">
-									<div class="row">
-										<div class="offset-xl-3 col-xl-12">
-											<img src="https://via.placeholder.com/110"
-												class="img-responsive rounded-circle img-thumbnail">
-											</p>
-										</div>
-										<div class="col-xl-12">
-											<p class="text-center">
-												<strong>${IDusuario.nome}</strong>
-											</p>
-											<p class="text-center small"><sec:authorize access="isAuthenticated()">
-														<sec:authentication property="name" />
-													</sec:authorize></p>
-											</p>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="divider dropdown-item"></li>
-							<li class="dropdown-item">
-								<div class="navbar-login navbar-login-session">
-									<div class="row mx-md-n5">
-										<div class="col px-md-5">
-											<p class="text-center">
-												<a href="#" class="btn btn-light btn-outline-dark"><i
-													class="fas fa-cog"></i></a>
-										</div>
-										<div class="col px-md-5">
-											<form action="/logout">
-											<p>
-												<button class="btn btn-danger"><i
-													class="fas fa-sign-out-alt"></i></button>
-											</p>
-											</form>
-										</div>
-									</div>
-								</div>
-							</li>
-						</ul></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ${IDusuario.nome}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="row justify-content-center"><img src="https://via.placeholder.com/110" class="img-responsive rounded-circle img-thumbnail"></div>
+          <div class="dropdown-divider"></div>
+          <strong class="dropdown-item">${IDusuario.nome}</strong>
+          <p class="text-center small">
+          	<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="name" />
+			</sec:authorize>
+			</p>
+			<p class="text-center">
+			<a class="btn btn-light btn-outline-dark" href="#">	
+          		<i class="fas fa-cog"></i>
+          		Configurações
+          </a>
+          </p>
+          <form action="/logout">
+	          <p class="text-center">
+				<a class="btn btn-outline-danger">	
+	          		<i class="fas fa-sign-out-alt"></i>
+	          		Sair
+	          </a>
+	          </p>
+	       	</form>
+        </div>
+      </li>
+    </ul>
+    <!-- 
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+     -->
+  </div>
+</nav>
 </body>
 </html>
