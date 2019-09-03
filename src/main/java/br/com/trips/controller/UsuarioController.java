@@ -28,9 +28,7 @@ public class UsuarioController {
 	
 	@Autowired
 	private ArmazenamentoImagemService armazenamentoImagemService;
-	
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
-	
+
 	@RequestMapping(path= {"/cadastro", "/", ""})
 	public String cadastro() {
 		return "usuarios/cadastro";
