@@ -8,16 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action='<c:url value="/imagens/upa"></c:url>' enctype="multipart/form-data">
-            <table border="0">
-                <tr>
-                    <td>Pick file #1:</td>
-                    <td><input type="file" name="arquivo" id="arquivo" size="50" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Upload" /></td>
-                </tr>
-            </table>
+	<form method="post" action="/imagens/upa" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <button type="submit">Upa ou morra</button>
         </form>
 </body>
 </html>

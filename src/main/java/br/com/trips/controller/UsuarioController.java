@@ -5,8 +5,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,18 +43,23 @@ public class UsuarioController {
 	}
 	//Testar
 	@RequestMapping(path = "/enviar", method = RequestMethod.POST)
-	public String salvar(Model model, Usuario usuario, @RequestParam("arquivo") MultipartFile arquivo) throws Exception {
+	public String salvar(Model model, Usuario usuario, @RequestParam("file") MultipartFile file,  ModelMap modelMap) {
 		//Salva usuario;
 		List<Roles> roles = new ArrayList<Roles>();
+		List<Imagens> imagens = new ArrayList<Imagens>();
 		roles.add(Roles.ADM_SISTEMA);
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
 		usuarioDao.saveAndFlush(usuario);
-		armazenamentoImagemService.armazenaArquivo(arquivo);
-		
-		List<Imagens> imagens = new ArrayList<Imagens>();
-		imagens.add((Imagens) arquivo);
+		try {
+			armazenamentoImagemService.armazenaArquivo(file);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		modelMap.addAttribute("file", file);
+		imagens.add((Imagens) file);
 		
 		model.addAttribute("usuarios", usuarioDao.findAll());
 		
