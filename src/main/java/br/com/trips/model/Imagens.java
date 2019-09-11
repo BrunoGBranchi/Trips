@@ -11,24 +11,9 @@ public class Imagens {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	private String nomeArquivo;
-	
-	private String tipoArquivo;
-	
+		
 	@Lob
-	private byte[] data;
-
-	public Imagens(String nomeArquivo, String tipoArquivo, byte[] data) {
-		super();
-		this.nomeArquivo = nomeArquivo;
-		this.tipoArquivo = tipoArquivo;
-		this.data = data;
-	}
-
-	public Imagens() {
-	
-	}
+	private String imagem;
 
 	public Long getId() {
 		return id;
@@ -38,28 +23,21 @@ public class Imagens {
 		this.id = id;
 	}
 
-	public String getNomeArquivo() {
-		return nomeArquivo;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setNomeArquivo(String nomeArquivo) {
-		this.nomeArquivo = nomeArquivo;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
-	public String getTipoArquivo() {
-		return tipoArquivo;
+	public Imagens(String imagem) {
+		super();
+		this.imagem = imagem;
 	}
 
-	public void setTipoArquivo(String tipoArquivo) {
-		this.tipoArquivo = tipoArquivo;
-	}
-
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
+	public Imagens() {
+	
 	}
 	
 	

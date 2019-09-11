@@ -1,6 +1,8 @@
 package br.com.trips.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,54 +21,47 @@ import br.com.trips.model.Imagens;
 import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
 import br.com.trips.repository.UsuarioRepository;
-import br.com.trips.service.ArmazenamentoImagemService;
 
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioDao;
-	
-	@Autowired
-	private ArmazenamentoImagemService armazenamentoImagemService;
 
-	@RequestMapping(path= {"/cadastro", "/", ""})
+	@RequestMapping(path = { "/cadastro", "/", "" })
 	public String cadastro() {
 		return "usuarios/cadastro";
 	}
-	
-	@RequestMapping(path= {"/mostrar"})
+
+	@RequestMapping(path = { "/mostrar" })
 	public String mostrar(Model model) {
 		model.addAttribute("usuarios", usuarioDao.findAll());
 		return "usuarios/mostrar";
 	}
-	//Testar
+
+	// Testar
 	@RequestMapping(path = "/enviar", method = RequestMethod.POST)
-	public String salvar(Model model, Usuario usuario, @RequestParam("file") MultipartFile file,  ModelMap modelMap) {
-		//Salva usuario;
+	public String salvar(Model model, Usuario usuario, MultipartFile file) throws IOException {
+		// Salva usuario;
 		List<Roles> roles = new ArrayList<Roles>();
 		List<Imagens> imagens = new ArrayList<Imagens>();
 		roles.add(Roles.ADM_SISTEMA);
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
+
+		String img = Base64.getEncoder().encodeToString(file.getBytes());
+		Imagens imagem = new Imagens(img);
+		imagens.add(imagem);
+		usuario.setImgPerfil(imagens);
+		
 		usuarioDao.saveAndFlush(usuario);
-		try {
-			armazenamentoImagemService.armazenaArquivo(file);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		modelMap.addAttribute("file", file);
-		imagens.add((Imagens) file);
-		
 		model.addAttribute("usuarios", usuarioDao.findAll());
-		
-		
+
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping(path = "/excluir/{id}")
 	public String excluir(@PathVariable(value = "id") Long id, Usuario usuario) {
 		List<Roles> roles = new ArrayList<Roles>(usuario.getRoles());
@@ -76,5 +71,5 @@ public class UsuarioController {
 		return "redirect:/index/index";
 
 	}
-	
+
 }
