@@ -36,14 +36,14 @@
 				<h2>Cadastrar Usuario</h2>
 				<br>
 				<form name="f1" id="f1" class="form-horizontal"
-					action='<c:url value="/usuarios/enviar"></c:url>' method="post">
+					action='<c:url value="/usuarios/enviar"></c:url>' method="post" enctype="multipart/form-data">
 
 					<div class="form-group">
 						<label class="col-sm-2 control-label">E-mail: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" id="login" name="login"
 								onblur="valida_form(f1.login)"
-								placeholder="exemplo@exemplo.com.br" required autofocus />
+								placeholder="exemplo@exemplo.com.br" required autofocus value="branchibruno@gmail.com" />
 							<div id="msgemail"></div>
 						</div>
 					</div>
@@ -53,7 +53,7 @@
 						<label class="col-sm-2 control-label">Senha: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="password" name="senha"
-								placeholder="Senha" required onblur="verificaSenha()" />
+								placeholder="Senha" required onblur="verificaSenha()" value="123456" />
 						</div>
 					</div>
 					<br>
@@ -61,7 +61,7 @@
 						<label class="col-sm-2 control-label">Confrimar senha: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="password" name="confirmaSenha"
-								placeholder="Confirmar senha" required onblur="verificaSenha()" />
+								placeholder="Confirmar senha" required onblur="verificaSenha()" value="123456" />
 							<div id="msgsenha"></div>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 						<label class="col-sm-2 control-label">Nome: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="nome"
-								placeholder="Nome Completo" required />
+								placeholder="Nome Completo" required value="Bruno Ghilardi Branchi"/>
 						</div>
 					</div>
 					<br>
@@ -81,7 +81,7 @@
 						</label>
 						<div class="col-sm-10">
 							<div class="input-group date" data-provide="datepicker">
-								<input type="text" class="form-control" name="data_nascimento">
+								<input type="text" class="form-control" name="data_nascimento" >
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
@@ -94,7 +94,7 @@
 						<label class="col-sm-2 control-label">CPF: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="cpf" id="cpf"
-								placeholder="000.000.000-00" required />
+								placeholder="000.000.000-00" required value="060.476.369-77"/>
 						</div>
 					</div>
 					<br>
@@ -103,7 +103,7 @@
 						<label class="col-sm-2 control-label">RG/Identidade: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="rg"
-								placeholder="0.000.000" required />
+								placeholder="0.000.000" required value="5710363"/>
 						</div>
 					</div>
 					<br>
@@ -112,7 +112,7 @@
 						<label class="col-sm-2 control-label">Orgão emissor: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="emissor"
-								placeholder="SSPSC" required />
+								placeholder="SSPSC" required value="SSPSC" />
 						</div>
 					</div>
 					<br>
@@ -139,7 +139,7 @@
 						<label class="col-sm-2 control-label">CEP: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="cep" id="cep"
-								placeholder="89820-000" required />
+								placeholder="89820-000" required value="89820-000"/>
 						</div>
 					</div>
 					<br>
@@ -148,7 +148,7 @@
 						<label class="col-sm-2 control-label">Endereço: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="endereco"
-								placeholder="Av. Brasil" required />
+								placeholder="Av. Brasil" required value="Av. Brasil"/>
 						</div>
 					</div>
 					<br>
@@ -156,7 +156,7 @@
 						<label class="col-sm-2 control-label">Numero: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="numero"
-								placeholder="100" required />
+								placeholder="100" required value="numero"/>
 						</div>
 					</div>
 					<br>
@@ -164,7 +164,7 @@
 						<label class="col-sm-2 control-label">Complemento: </label>
 						<div class="col-sm-10">
 							<input class="form-control" type="text" name="complemento"
-								placeholder="Casa/Ap 101" required />
+								placeholder="Casa/Ap 101" required value="casa"/>
 						</div>
 					</div>
 					<br> 
