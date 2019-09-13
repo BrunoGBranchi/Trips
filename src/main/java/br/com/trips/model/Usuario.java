@@ -1,7 +1,11 @@
 package br.com.trips.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,8 +35,8 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String login;
 	private String senha;
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	private Date data_nascimento;
+	private String data_nascimento;
+	private int idade;
 	private String cpf;
 	private String rg;
 	private String emissor;
@@ -59,6 +63,26 @@ public class Usuario implements Serializable {
 		}
 	}
 
+	public void calculaIdade() {
+		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date dataNascInput = null;
+		try {
+			dataNascInput = sdf.parse(this.data_nascimento);
+		} catch (Exception e) {
+			
+		}
+		Calendar dateOfBirth = new GregorianCalendar();
+		dateOfBirth.setTime(dataNascInput);
+		// Cria um objeto calendar com a data atual
+		Calendar today = Calendar.getInstance();
+		// Obtém a idade baseado no ano
+		this.idade = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+		dateOfBirth.add(Calendar.YEAR, this.idade);
+		if (today.before(dateOfBirth)) {
+			this.idade--;
+		}
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -91,14 +115,22 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public Date getData_nascimento() {
+	public String getData_nascimento() {
 		return data_nascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
+	public void setData_nascimento(String data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
 
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -224,4 +256,6 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + "]";
 	}
+
+	
 }

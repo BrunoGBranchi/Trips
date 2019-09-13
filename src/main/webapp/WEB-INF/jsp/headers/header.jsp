@@ -46,9 +46,14 @@
           ${IDusuario.nome}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="row justify-content-center"><img src="https://via.placeholder.com/110" class="img-responsive rounded-circle img-thumbnail"></div>
+          <div class="row justify-content-center">
+          <c:forEach var="img" items="${IDusuario.imgPerfil}">
+          	<img src="data:image/jpg;base64,${img.imagem}" class="img-responsive rounded-circle img-thumbnail" width="100" height="100">
+          	</c:forEach>
+          	</div>
           <div class="dropdown-divider"></div>
           <strong class="dropdown-item">${IDusuario.nome}</strong>
+          <strong class="dropdown-item">${IDusuario.idade} anos</strong>
           <p class="text-center small">
           	<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="name" />
@@ -62,7 +67,7 @@
           </p>
           <form action="/logout">
 	          <p class="text-center">
-				<a class="btn btn-outline-danger">	
+				<a class="btn btn-outline-danger" type="submit">	
 	          		<i class="fas fa-sign-out-alt"></i>
 	          		Sair
 	          </a>

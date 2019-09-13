@@ -50,6 +50,7 @@ public class UsuarioController {
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
+		usuario.calculaIdade();
 
 		String img = Base64.getEncoder().encodeToString(file.getBytes());
 		Imagens imagem = new Imagens(img);

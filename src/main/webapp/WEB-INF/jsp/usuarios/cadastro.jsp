@@ -80,12 +80,7 @@
 						<label class="col-sm-2 control-label">Data de Nascimento:
 						</label>
 						<div class="col-sm-10">
-							<div class="input-group date" data-provide="datepicker">
-								<input type="text" class="form-control" name="data_nascimento" >
-								<div class="input-group-addon">
-									<span class="glyphicon glyphicon-th"></span>
-								</div>
-							</div>
+								<input type="text" class="form-control" name="data_nascimento" id="data_nascimento">
 						</div>
 					</div>
 					<br>
@@ -235,9 +230,7 @@
 	jQuery(function($) {
 		$("#cpf").mask("999.999.999-99");
 		$("#cep").mask("99999-999");
-		$(".datepicker").datepicker({
-			format: 'dd/mm/yyyy'
-		});
+		$("#data_nascimento").mask("99/99/9999");
 	});
 
 

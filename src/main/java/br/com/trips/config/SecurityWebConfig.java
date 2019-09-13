@@ -26,13 +26,13 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // TODO remover
+		//http.csrf().disable(); // TODO remover
 		http
 			.authorizeRequests()
 				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/login**", "/usuarios/**").permitAll()
 				.anyRequest().anonymous()
 				.antMatchers("/index/**").hasRole("ADM_SISTEMA")
-				//.anyRequest().authenticated()
+				.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").permitAll();
 	}
