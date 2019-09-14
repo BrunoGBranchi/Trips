@@ -58,7 +58,7 @@
             <i class="fa fa-calendar"></i>
           </div>
         </div> 
-        <input id="data_saida" name="data_saida" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
+        <input id="data" name="data_saida" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@
             <i class="fa fa-calendar"></i>
           </div>
         </div> 
-        <input id="data_retorno" name="data_retorno" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
+        <input id="data" name="data_retorno" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
       </div>
     </div>
   </div>
@@ -162,6 +162,16 @@
     </div>
   </div>
 </form>
-
+<script type="text/javascript"
+	src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.js"/>"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery(function($) {
+	$("#data").mask("99/99/9999");
+});
+</script>
 </body>
 </html>
