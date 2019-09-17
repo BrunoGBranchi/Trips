@@ -173,8 +173,7 @@
 					</div>
 					<br>
 					
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
+					
 					<div class="form-group">
 						<button class="btn btn-success" type="submit">Cadastrar</button>
 					</div>
