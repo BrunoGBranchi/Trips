@@ -44,11 +44,10 @@ public class ViagemController {
 	public String salvar(MultipartFile[] imagens, MultipartFile roteiro, Model model, Viagem viagem) throws IOException {
 		viagem.setRoteiro(converteArquivo.converter(roteiro));
 		List<Imagens> listaImagens = new ArrayList<Imagens>();
-		LinkedList<Imagens> linkedImagens = new LinkedList<Imagens>();
-		List<Imagens> listaImagensConv = new ArrayList<Imagens>(linkedImagens);
-		for (Imagens imagens2 : listaImagensConv) {
-			String img = Base64.getEncoder().encodeToString(roteiro.getBytes());
-			System.out.println(img);
+		for (int i = 0; i < imagens.length; i++) {
+			MultipartFile multipartFile = imagens[i];
+			String stArquivo = Base64.getEncoder().encodeToString(multipartFile.getBytes());
+			System.out.println(stArquivo);
 		}
 		
 		
