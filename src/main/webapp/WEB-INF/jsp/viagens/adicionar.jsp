@@ -62,7 +62,7 @@
 	            <i class="fa fa-calendar"></i>
 	          </div>
 	        </div> 
-	        <input id="data" name="data_saida" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
+	        <input id="data_saida" name="data_saida" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
 	      </div>
 	    </div>
 	  </div>
@@ -75,7 +75,7 @@
 	            <i class="fa fa-calendar"></i>
 	          </div>
 	        </div> 
-	        <input id="hora" name="hora_saida" placeholder="HH:MM" type="text" required="required" class="form-control">
+	        <input id="hora_saida" name="hora_saida" placeholder="HH:MM" type="text" required="required" class="form-control">
 	      </div>
 	    </div>
 	  </div>
@@ -101,7 +101,7 @@
 	            <i class="fa fa-calendar"></i>
 	          </div>
 	        </div> 
-	        <input id="data" name="data_retorno" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
+	        <input id="data_retorno" name="data_retorno" placeholder="DD/MM/AAAA" type="text" required="required" class="form-control">
 	      </div>
 	    </div>
 	  </div>
@@ -114,7 +114,7 @@
 	            <i class="fa fa-calendar"></i>
 	          </div>
 	        </div> 
-	        <input id="hora" name="hora_retorno" placeholder="HH:MM" type="text" required="required" class="form-control">
+	        <input id="hora_retorno" name="hora_retorno" placeholder="HH:MM" type="text" required="required" class="form-control">
 	      </div>
 	    </div>
 	  </div>
@@ -127,7 +127,7 @@
 	            <i class="fa fa-calendar"></i>
 	          </div>
 	        </div> 
-	        <input id="hora" name="hora_chegada" placeholder="HH:MM" type="text" required="required" class="form-control">
+	        <input id="hora_chegada" name="hora_chegada" placeholder="HH:MM" type="text" required="required" class="form-control">
 	      </div>
 	    </div>
 	  </div>
@@ -181,7 +181,7 @@
 	            <i class="fa fa-cloud-upload"></i>
 	          </div>
 	        </div> 
-	        <input id="imagens" name="imagens" placeholder="Escolha as imagens" type="file" required="required" class="form-control" multiple>
+	        <input id="imagensFile" name="imagensFile" placeholder="Escolha as imagens" type="file" required="required" class="form-control" multiple>
 	      </div>
 	    </div>
 	  </div>
@@ -194,7 +194,7 @@
 	            <i class="fa fa-cloud-upload"></i>
 	          </div>
 	        </div> 
-	        <input id="roteiro" name="roteiro" placeholder="Selecione o arquivo do roteiro" type="file" aria-describedby="roteiroHelpBlock" required="required" class="form-control">
+	        <input id="roteiroFile" name="roteiroFile" placeholder="Selecione o arquivo do roteiro" type="file" aria-describedby="roteiroHelpBlock" class="form-control">
 	      </div> 
 	      <span id="roteiroHelpBlock" class="form-text text-muted">Apenas arquivo no formato PDF</span>
 	    </div>
@@ -217,8 +217,12 @@
 <script src="<c:url value='/resources/js/jquery.maskedinput.min.js'/>"></script>
 <script type="text/javascript">
 jQuery(function($) {
-	$("#data").mask("99/99/9999");
-	$("#hora").mask("99:99");
+	$("#data_saida").mask("99/99/9999");
+	$("#data_retorno").mask("99/99/9999");
+	$("#hora_saida").mask("99:99");
+	$("#hora_retorno").mask("99:99");
+	$("#hora_chegada").mask("99:99");
+	$("#valor").mask("#.##0,00", {reverse: true});
 });
 </script>
 </body>

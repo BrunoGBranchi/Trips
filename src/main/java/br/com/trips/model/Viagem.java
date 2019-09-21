@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -28,8 +29,9 @@ public class Viagem {
 	private String valor;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Imagens> imagens;
+	@Lob
 	private String roteiro;
-
+	
 	public Long getId() {
 		return id;
 	}
