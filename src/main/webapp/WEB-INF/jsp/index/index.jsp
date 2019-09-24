@@ -12,26 +12,36 @@
 
 <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>"
 	rel="stylesheet" type="text/css">
-
+<link href="<c:url value="/resources/css/index.css"/>" rel="stylesheet"
+	type="text/css">
 
 <title>Trips - Bem-Vindo!</title>
 </head>
 <body>
 <c:import url="../headers/header.jsp"></c:import>
 <div style="margin-top: 50px;" class="container">
-	<p>
-	<sec:authorize access="isAuthenticated()">
-		<sec:authentication property="name" />
-	</sec:authorize>
-	</p>
-	<p>"${IDusuario.id}"</p>
-	<form action="/logout">
-		<button style="margin-top: 50px;" type="submit">Sair</button>
-	</form>
-	<form action="/delete/${IDusuario.id}">
-		<input type="hidden" name="id" value="${IDusuario.id}">
-		<button type="submit">Excluir usuario</button>
-	</form>
+    <c:forEach var="viagem" items="${viagens}">
+	    <div class="row">
+	        <div class="list-group">
+	            <div class="list-group-item clearfix">
+	                <div class="profile-teaser-left">
+	                    <div class="profile-img">
+	                        <img src="data:image/jpg;base64,${imgviagem}">
+	                    </div>
+	                </div>
+	                <div class="profile-teaser-main">
+	                     <h2 class="profile-name">${viagem.titulo}</h2>
+	                    <div class="profile-info">
+	                        <div class="info"><span class="">Data de saida:</span> ${viagem.data_saida}</div>
+	                        <div class="info"><span class="">Saida de:</span> ${viagem.origem}</div>
+	                        <div class="info"><span class="">Valores inclusos:</span> ${viagem.inclusos}</div>
+	                        <div class="info"><span class="">Preco por pessoa:</span> ${viagem.valor}</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </c:forEach>
 </div>
 </body>
 

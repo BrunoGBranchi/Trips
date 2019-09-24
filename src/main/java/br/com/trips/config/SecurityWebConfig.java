@@ -29,9 +29,9 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 		//http.csrf().disable(); // TODO remover
 		http
 			.authorizeRequests()
-				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/login**", "/usuarios/**").permitAll()
+				.antMatchers("/resources/**", "/webjars/**", "/facebook/**", "/login**", "/usuarios/**", "/index/**").permitAll()
 				.anyRequest().anonymous()
-				.antMatchers("/index/**").hasRole("ADM_SISTEMA")
+				.antMatchers("/viagens/adicionar").hasRole("ADM_SISTEMA")
 				.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").permitAll();

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
+import br.com.trips.repository.ViagemRepository;
 
 @Controller
 @RequestMapping(path = {"/index", "/"})
@@ -24,9 +27,18 @@ public class IndexController {
 	@Autowired
 	private UsuarioRepository usuarioDao;
 	
+	@Autowired
+	private ViagemRepository viagemRepository;
+	
 	@GetMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
-		model.addAttribute("IDusuario", usuarioDao.findByLogin(principal.getName()));
+		//model.addAttribute("IDusuario", usuarioDao.findByLogin(principal.getName()));
+		model.addAttribute("viagens", viagemRepository.findAll());
+		
+		for(Viagem list : viagemRepository.findAll()){  
+	        model.addAttribute("imgviagem", list.getImagens().get(0).getImagem());
+	 }  
+		
 		return "index/index";
 	}
 	
@@ -47,5 +59,7 @@ public class IndexController {
 		}
 		return "redirect:/login?logout=true";
 	}
+	
+	
 	
 }
