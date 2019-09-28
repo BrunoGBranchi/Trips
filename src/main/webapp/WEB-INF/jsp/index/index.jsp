@@ -9,7 +9,10 @@
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
-
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
 <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>"
 	rel="stylesheet" type="text/css">
 <link href="<c:url value="/resources/css/index.css"/>" rel="stylesheet"
@@ -36,6 +39,7 @@
 	                        <div class="info"><span class="">Saida de:</span> ${viagem.origem}</div>
 	                        <div class="info"><span class="">Valores inclusos:</span> ${viagem.inclusos}</div>
 	                        <div class="info"><span class="">Preco por pessoa:</span> ${viagem.valor}</div>
+	                        <div class="position-fixed"><a href="<c:url value = "/viagens/detalhes/${viagem.id}"/>"><button class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> VER MAIS</button></a></div>
 	                    </div>
 	                </div>
 	            </div>
