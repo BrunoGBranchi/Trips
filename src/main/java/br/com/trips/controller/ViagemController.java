@@ -1,6 +1,7 @@
 package br.com.trips.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trips.model.Imagens;
+import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
+import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
 
 @Controller
@@ -25,6 +28,9 @@ public class ViagemController {
 	
 	@Autowired
 	private ViagemRepository viagemDao;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping({"/", "/listar", ""})
 	public String listar() {
@@ -59,6 +65,32 @@ public class ViagemController {
 		Optional <Viagem> v = viagemDao.findById(id);
 		model.addAttribute("detalhes", v.get());
 		return "viagens/detalhes";
+	}
+	
+	@RequestMapping(path = "/adicionaPassageiro/{id}")
+	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem) {
+		Usuario u = usuarioRepository.findByLogin(principal.getName());
+		Optional <Viagem> v = viagemDao.findById(id);
+		List<Usuario> passageiros = new ArrayList<Usuario>();
+		passageiros.add(u);
+		viagem.setData_retorno(v.get().getData_retorno());
+		viagem.setData_saida(v.get().getData_saida());
+		viagem.setDestino(v.get().getDestino());
+		viagem.setEmbarque(v.get().getEmbarque());
+		viagem.setHora_chegada(v.get().getHora_chegada());
+		viagem.setHora_retorno(v.get().getHora_retorno());
+		viagem.setHora_saida(v.get().getHora_saida());
+		viagem.setId(v.get().getId());
+		viagem.setImagens(v.get().getImagens());
+		viagem.setInclusos(v.get().getInclusos());
+		viagem.setOrigem(v.get().getOrigem());
+		viagem.setRoteiro(v.get().getRoteiro());
+		viagem.setTitulo(v.get().getTitulo());
+		viagem.setValor(v.get().getValor());
+		viagem.setVisitacoes(v.get().getVisitacoes());
+		viagem.setPassageiros(passageiros);
+		viagemDao.saveAndFlush(viagem);
+		return "redirect:viagens/detalhes";
 	}
 	
 }

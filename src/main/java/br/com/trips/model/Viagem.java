@@ -31,7 +31,9 @@ public class Viagem {
 	private List<Imagens> imagens;
 	@Lob
 	private String roteiro;
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Usuario> passageiros;
+
 	public Long getId() {
 		return id;
 	}
@@ -152,9 +154,17 @@ public class Viagem {
 		this.roteiro = roteiro;
 	}
 
+	public List<Usuario> getPassageiros() {
+		return passageiros;
+	}
+
+	public void setPassageiros(List<Usuario> passageiros) {
+		this.passageiros = passageiros;
+	}
+
 	public Viagem(Long id, String titulo, String origem, String data_saida, String hora_saida, String destino,
 			String data_retorno, String hora_retorno, String hora_chegada, String embarque, String visitacoes,
-			String inclusos, String valor, List<Imagens> imagens, String roteiro) {
+			String inclusos, String valor, List<Imagens> imagens, String roteiro, List<Usuario> passageiros) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -171,6 +181,7 @@ public class Viagem {
 		this.valor = valor;
 		this.imagens = imagens;
 		this.roteiro = roteiro;
+		this.passageiros = passageiros;
 	}
 
 	public Viagem() {
