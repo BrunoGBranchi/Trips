@@ -1,11 +1,19 @@
 package br.com.trips.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +29,15 @@ import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 @RequestMapping("/viagens")
@@ -31,6 +48,9 @@ public class ViagemController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	@GetMapping({"/", "/listar", ""})
 	public String listar() {
@@ -67,10 +87,11 @@ public class ViagemController {
 		return "viagens/detalhes";
 	}
 	
+	//esse colosso aqui adiciona o passageiro na viagem e gera o comprovante
 	@RequestMapping(path = "/adicionaPassageiro/{id}")
-	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem) {
+	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem, HttpServletResponse response) throws JRException, SQLException, IOException  {
 		Usuario u = usuarioRepository.findByLogin(principal.getName());
-		Optional <Viagem> v = viagemDao.findById(id);
+		Optional<Viagem> v = viagemDao.findById(id);
 		List<Usuario> passageiros = new ArrayList<Usuario>();
 		passageiros.add(u);
 		viagem.setData_retorno(v.get().getData_retorno());
@@ -90,6 +111,20 @@ public class ViagemController {
 		viagem.setVisitacoes(v.get().getVisitacoes());
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
+		
+				InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/Comprovante.jasper");
+				
+				JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+				
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JRBeanCollectionDataSource(viagemDao.preencheRelatorio(id)));
+
+				response.setContentType("application/pdf");
+
+				response.setHeader("Content-Disposition", "inline; filename=comprovante.pdf");
+
+				final OutputStream outStream = response.getOutputStream();
+				JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		
 		return "redirect:viagens/detalhes";
 	}
 	
