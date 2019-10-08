@@ -89,7 +89,7 @@ public class ViagemController {
 	
 	//esse colosso aqui adiciona o passageiro na viagem e gera o comprovante
 	@RequestMapping(path = "/adicionaPassageiro/{id}")
-	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem, HttpServletResponse response) throws JRException, SQLException, IOException  {
+	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem) throws JRException, SQLException, IOException  {
 		Usuario u = usuarioRepository.findByLogin(principal.getName());
 		Optional<Viagem> v = viagemDao.findById(id);
 		List<Usuario> passageiros = new ArrayList<Usuario>();
@@ -112,18 +112,7 @@ public class ViagemController {
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
 		
-				InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/Comprovante.jasper");
 				
-				JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
-				
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JRBeanCollectionDataSource(viagemDao.preencheRelatorio(id)));
-
-				response.setContentType("application/pdf");
-
-				response.setHeader("Content-Disposition", "inline; filename=comprovante.pdf");
-
-				final OutputStream outStream = response.getOutputStream();
-				JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 		
 		return "redirect:viagens/detalhes";
 	}
