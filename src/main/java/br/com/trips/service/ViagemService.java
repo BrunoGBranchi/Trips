@@ -22,35 +22,29 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 @Service
 public class ViagemService {
-	
+
 	@Autowired
 	ViagemRepository viagemRepository;
-	
-	public List<Viagem> load(Long id){
+
+	public void load(Long id, HttpServletResponse response) throws JRException, IOException {
+
 		
-		List<Viagem> v = viagemRepository.preencheRelatorio(id);
-		
-		
-		/*
-		 * InputStream jasperStream =
-		 * this.getClass().getResourceAsStream("/relatorios/Comprovante.jasper");
-		 * 
-		 * JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
-		 * 
-		 * JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,
-		 * new JRBeanCollectionDataSource(viagemRepository.preencheRelatorio(id)));
-		 * 
-		 * response.setContentType("application/pdf");
-		 * 
-		 * response.setHeader("Content-Disposition",
-		 * "inline; filename=comprovante.pdf");
-		 * 
-		 * final OutputStream outStream = response.getOutputStream();
-		 * JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
-		 */
-		
-		return v;
-		
+		 InputStream jasperStream =
+		 this.getClass().getResourceAsStream("/relatorios/Comprovante.jasper");
+		 
+		 JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+		 
+		 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JRBeanCollectionDataSource(viagemRepository.preencheRelatorio(id)));
+		 
+		 response.setContentType("application/pdf");
+		 
+		 response.setHeader("Content-Disposition",
+		 "inline; filename=comprovante.pdf");
+		  
+		 final OutputStream outStream = response.getOutputStream();
+		 JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		 
+
 	}
-	
+
 }

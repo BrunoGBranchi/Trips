@@ -29,6 +29,7 @@ import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
+import br.com.trips.service.ViagemService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -45,6 +46,9 @@ public class ViagemController {
 	
 	@Autowired
 	private ViagemRepository viagemDao;
+	
+	@Autowired
+	private ViagemService viagemService;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -89,7 +93,7 @@ public class ViagemController {
 	
 	//esse colosso aqui adiciona o passageiro na viagem e gera o comprovante
 	@RequestMapping(path = "/adicionaPassageiro/{id}")
-	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem) throws JRException, SQLException, IOException  {
+	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem, HttpServletResponse response) throws JRException, SQLException, IOException  {
 		Usuario u = usuarioRepository.findByLogin(principal.getName());
 		Optional<Viagem> v = viagemDao.findById(id);
 		List<Usuario> passageiros = new ArrayList<Usuario>();
@@ -112,7 +116,7 @@ public class ViagemController {
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
 		
-				
+		viagemService.load(id, response);
 		
 		return "redirect:viagens/detalhes";
 	}
