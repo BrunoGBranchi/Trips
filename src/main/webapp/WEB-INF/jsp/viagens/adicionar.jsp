@@ -181,7 +181,7 @@
 	            <i class="fa fa-cloud-upload"></i>
 	          </div>
 	        </div> 
-	        <input id="imagensFile" name="imagensFile" placeholder="Escolha as imagens" type="file" required="required" class="form-control" multiple>
+	        <input id="imagensFile" name="imagensFile" accept=".png, .jpg, .jpeg" placeholder="Escolha as imagens" type="file" required="required" class="form-control" multiple>
 	      </div>
 	    </div>
 	  </div>
@@ -194,7 +194,7 @@
 	            <i class="fa fa-cloud-upload"></i>
 	          </div>
 	        </div> 
-	        <input id="roteiroFile" name="roteiroFile" placeholder="Selecione o arquivo do roteiro" type="file" aria-describedby="roteiroHelpBlock" class="form-control">
+	        <input id="roteiroFile" name="roteiroFile" accept=".pdf" placeholder="Selecione o arquivo do roteiro" type="file" aria-describedby="roteiroHelpBlock" class="form-control">
 	      </div> 
 	      <span id="roteiroHelpBlock" class="form-text text-muted">Apenas arquivo no formato PDF</span>
 	    </div>
