@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Comprovante" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cfd6284-6591-44ab-be38-af186b149f4f">
 	<parameter name="viagem" class="br.com.trips.model.Viagem"/>
+	<parameter name="usuario" class="br.com.trips.model.Usuario"/>
+	<parameter name="qrcode" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -9,29 +11,102 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="140" splitType="Stretch">
-			<textField isBlankWhenNull="true">
-				<reportElement x="320" y="30" width="195" height="36" uuid="7b54693c-29bb-4f50-8c6d-57c68f749ff5"/>
-				<textFieldExpression><![CDATA[$P{viagem}.getTitulo()]]></textFieldExpression>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="380" y="0" width="170" height="40" uuid="59a7ac15-16ce-4f22-a04f-468d2ac2142d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprovante de passageiro de viagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="230" height="60" uuid="aab0683c-61e3-42c7-bc1d-294b65c13c76"/>
+				<textElement textAlignment="Center">
+					<font fontName="Corbel" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA TRIPS]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="490" y="40" width="60" height="30" uuid="ca7bb6ea-463c-47f3-acae-14bc5ae26201"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="200" y="30" width="100" height="30" uuid="2e371962-7306-4432-938f-decef9d1d50e"/>
-				<text><![CDATA[Algo tem que aparecer ao lado -->]]></text>
+				<reportElement x="380" y="40" width="100" height="30" uuid="40ff4b89-af3e-40eb-94f0-3198c9c61a17"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Data de emissão do comprovante:]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="80" width="100" height="20" uuid="1e425a31-c982-415e-a774-c5217a02aa14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Numero Identidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="20" width="100" height="20" uuid="513a0ab0-ce97-47a2-9178-a18d919ff9f0"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Pacote selecionado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="50" width="100" height="20" uuid="33b118a0-573a-4ada-92c3-8c13b899b817"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Passageiro:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="291" y="20" width="195" height="20" uuid="a0bc52d9-744c-494f-a71d-b2eed29ee7cd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getTitulo()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="50" width="195" height="20" uuid="0a188b2f-142a-4cfe-9edb-3e28390eeeb5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="80" width="195" height="20" uuid="963de5e5-845e-4917-b1e5-6a67782d7906"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}.getRg()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="171" y="110" width="100" height="20" uuid="0dfe2d10-4f7c-400b-8d6a-00b746f93d05"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CPF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="110" width="195" height="20" uuid="95cc2714-6f16-4418-98ef-b059a3050660"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}.getCpf()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="209" splitType="Stretch">
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="167" y="0" width="250" height="250" backcolor="#333333" uuid="69040a0b-eb26-4099-bea9-2e1defa9ee72"/>
+				<imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream($P{qrcode}))]]></imageExpression>
+			</image>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>

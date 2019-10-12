@@ -1,20 +1,14 @@
 package br.com.trips.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,16 +23,9 @@ import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
+import br.com.trips.service.QRCodeService;
 import br.com.trips.service.ViagemService;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 @RequestMapping("/viagens")
@@ -54,7 +41,7 @@ public class ViagemController {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
-	private DataSource dataSource;
+	private QRCodeService qrCodeService;
 	
 	@GetMapping({"/", "/listar", ""})
 	public String listar() {
@@ -115,8 +102,8 @@ public class ViagemController {
 		viagem.setVisitacoes(v.get().getVisitacoes());
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
+		viagemService.load(id, response, principal);
 		
-		viagemService.load(id, response);
 		
 		return "redirect:viagens/detalhes";
 	}
