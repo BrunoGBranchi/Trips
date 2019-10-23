@@ -21,7 +21,7 @@ import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
 
 @Controller
-@RequestMapping(path = {"/index", "/"})
+@RequestMapping(path = {"/index", "/", ""})
 public class IndexController {
 	
 	@Autowired
