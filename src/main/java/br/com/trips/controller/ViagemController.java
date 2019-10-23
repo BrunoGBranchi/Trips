@@ -108,4 +108,10 @@ public class ViagemController {
 		return "redirect:viagens/detalhes";
 	}
 	
+	@RequestMapping(path = "/lerQR")
+	public String lerQR() {
+
+		return "viagens/leituraQRcode";
+	}
+	
 }

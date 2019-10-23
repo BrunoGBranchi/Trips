@@ -51,12 +51,12 @@ public class ViagemService {
 
 			byte[] decodeBase64 = Base64
 					.decodeBase64(qrCodeService.geraQRCode(findById.get().getId(), findUsuario.getId()).getBytes());
-			BufferedImage image = ImageIO.read(new ByteArrayInputStream(decodeBase64));
-			File arquivo = new File(image);
-			arquivo.
+			//BufferedImage image = ImageIO.read();
+			//File arquivo = new File("relatorios/qr.png");
+			
 			v.put("viagem", findById.get());
 			v.put("usuario", findUsuario);
-			v.put("qrcode", image);
+			v.put("qrcode", new ByteArrayInputStream(decodeBase64));
 
 			InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/comprovante.jrxml");
 

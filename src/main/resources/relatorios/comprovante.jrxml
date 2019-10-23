@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="viagem" class="br.com.trips.model.Viagem"/>
 	<parameter name="usuario" class="br.com.trips.model.Usuario"/>
-	<parameter name="qrcode" class="java.awt.image.BufferedImage">
+	<parameter name="qrcode" class="java.io.InputStream" evaluationTime="Late">
 		<defaultValueExpression><![CDATA[$P{qrcode}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -43,7 +43,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="138" splitType="Stretch">
+		<band height="320" splitType="Stretch">
 			<staticText>
 				<reportElement x="171" y="80" width="100" height="20" uuid="1e425a31-c982-415e-a774-c5217a02aa14"/>
 				<textElement textAlignment="Right">
@@ -100,16 +100,12 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{usuario}.getCpf()]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageHeader>
-	<detail>
-		<band height="260" splitType="Stretch">
-			<image>
-				<reportElement x="267" y="141" width="50" height="50" uuid="242fee9c-e728-494c-b203-9b24f08d446c"/>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true" isLazy="true" evaluationTime="Report">
+				<reportElement x="212" y="160" width="130" height="130" uuid="242fee9c-e728-494c-b203-9b24f08d446c"/>
 				<imageExpression><![CDATA[$P{qrcode}]]></imageExpression>
 			</image>
 		</band>
-	</detail>
+	</pageHeader>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
