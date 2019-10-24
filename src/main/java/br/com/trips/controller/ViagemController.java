@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trips.model.Imagens;
+import br.com.trips.model.QR;
 import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
@@ -51,6 +54,16 @@ public class ViagemController {
 	@GetMapping("/adicionar")
 	public String adicionar() {
 		return "viagens/adicionar";
+	}
+	
+	@RequestMapping(path = "/lerQR")
+	public String lerQR() {
+		return "viagens/leituraQRcode";
+	}
+	
+	@RequestMapping(path = "/mostrarQR")
+	public String mostrarQR() {
+		return "viagens/mostrarQRcode";
 	}
 	
 	@PostMapping({"/salvar"})
@@ -103,14 +116,22 @@ public class ViagemController {
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
 		viagemService.load(id, response, principal);
-		
-		
 		return "redirect:viagens/detalhes";
 	}
 	
-	@RequestMapping(path = "/lerQR")
-	public String lerQR() {
-
+	@PostMapping({"/validaQR"})
+	public String submitQR(QR qr) {
+		System.out.println("Teste: " + qr.getValores());
+		String[] s = qr.getValores().split(Pattern.quote(","));
+		String valor1;
+		String valor2;
+		System.out.println(s);
+		for (int i = 0; i < s.length; i++) {
+			valor1 = s[i];
+			valor2 = s[i++];
+			System.out.println(valor1);
+			System.out.println(valor2);
+		}
 		return "viagens/leituraQRcode";
 	}
 	

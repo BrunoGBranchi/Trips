@@ -13,10 +13,16 @@
 <h1>Teste leitor QRCode</h1>
     
     <video id="preview"></video>
+    <form id="submitConteudo" action='<c:url value="/viagens/validaQR"></c:url>' method="POST" enctype="multipart/form-data">
+    	<input name="valores" id=conteudo>
+    		  <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" /> 
+    </form>
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-        alert(content);
+        $('#conteudo').val(content);
+        $('#submitConteudo').submit();
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {

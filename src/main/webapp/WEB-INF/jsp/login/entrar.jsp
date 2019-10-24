@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
-          <h1 class="text-white">Trips.</h1>
+          <h1 class="text-white"><i class="fas fa-road"></i> Trips.</h1>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,7 +32,7 @@
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-brand">
-                  <h1 class="text-white">Trips.</h1>
+                  <h1 class="text-purple"><i class="fas fa-road"></i> Trips.</h1>
               </div>
               <div class="col-6 collapse-close">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
