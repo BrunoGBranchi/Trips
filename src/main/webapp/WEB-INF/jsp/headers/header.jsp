@@ -6,77 +6,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>"
-	rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-	crossorigin="anonymous">
-<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet"
-	type="text/css">
-
-<meta charset="UTF-8" name="viewport"
-	content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="<c:url value="/resources/js/plugins/nucleo/css/nucleo.css"/>" rel="stylesheet" />
+  <link href="<c:url value="/resources/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"/>"rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="<c:url value="/resources/css/argon-dashboard.css?v=1.1.0"/>" rel="stylesheet" />
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ${IDusuario.nome}
+<body class="">
+   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+        <a href="<c:url value="/index"></c:url>">
+            <h1 class="text-purple"><i class="fas fa-road"></i> Trips.</h1>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="row justify-content-center">
-          <c:forEach var="img" items="${IDusuario.imgPerfil}">
-          	<img src="data:image/jpg;base64,${img.imagem}" class="img-responsive rounded-circle img-thumbnail" width="100" height="100">
-          	</c:forEach>
-          	</div>
-          <div class="dropdown-divider"></div>
-          <strong class="dropdown-item">${IDusuario.nome}</strong>
-          <strong class="dropdown-item">${IDusuario.idade} anos</strong>
-          <p class="text-center small">
-          	<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="name" />
-			</sec:authorize>
-			</p>
-			<p class="text-center">
-			<a class="btn btn-light btn-outline-dark" href="#">	
-          		<i class="fas fa-cog"></i>
-          		Configurações
+      <!-- User -->
+      <ul class="nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
           </a>
-          </p>
-          <form action="/logout">
-	          <p class="text-center">
-				<a class="btn btn-outline-danger" type="submit">	
-	          		<i class="fas fa-sign-out-alt"></i>
-	          		Sair
-	          </a>
-	          </p>
-	       	</form>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Welcome!</h6>
+            </div>
+            <a href="./examples/profile.html" class="dropdown-item">
+              <i class="ni ni-single-02"></i>
+              <span>My profile</span>
+            </a>
+            <a href="./examples/profile.html" class="dropdown-item">
+              <i class="ni ni-settings-gear-65"></i>
+              <span>Settings</span>
+            </a>
+            <a href="./examples/profile.html" class="dropdown-item">
+              <i class="ni ni-calendar-grid-58"></i>
+              <span>Activity</span>
+            </a>
+            <a href="./examples/profile.html" class="dropdown-item">
+              <i class="ni ni-support-16"></i>
+              <span>Support</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#!" class="dropdown-item">
+              <i class="ni ni-user-run"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="./index.html">
+                <h1 class="text-purple"><i class="fas fa-road"></i> Trips.</h1>
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
         </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <!-- Form -->
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+         <sec:authorize access="hasRole('ADM_SISTEMA')">
+        <li class="nav-item">
+            <a class="nav-link " href="<c:url value="/usuarios/dashboard"></c:url>">
+              <i class="ni ni-tv-2 text-primary"></i> Painel de controle
+            </a>
+          </li>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ADM_SISTEMA')">
+        <li class="nav-item">
+            <a class="nav-link " href="<c:url value="/viagens/adicionar"></c:url>">
+              <i class="ni ni-fat-add text-blue"></i> Adicionar pacote
+            </a>
+          </li>
+        </sec:authorize>
+          <li class="nav-item"  class="active">
+          <a class=" nav-link active " href="<c:url value="viagens/listar"></c:url>"> <i class="ni ni-bullet-list-67 text-primary"></i> Lista de viagens
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<c:url value="/usuarios/perfil"></c:url>">
+              <i class="ni ni-single-02 text-blue"></i> Perfil
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<c:url value="/logout"></c:url>">
+              <i class="ni ni-button-power text-red"></i> Sair
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+   <!--   Core   -->
+  <script src="<c:url value="/resources/js/plugins/jquery/dist/jquery.min.js"/>"></script>
+  <script src="<c:url value="/resources/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
+  <!--   Optional JS   -->
+  <!--   Argon JS   -->
+  <script src="<c:url value="/resources/js/argon-dashboard.min.js?v=1.1.0"/>"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-dashboard-free"
+      });
+  </script>
 </body>
 </html>

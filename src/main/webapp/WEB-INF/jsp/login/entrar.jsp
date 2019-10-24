@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicon -->
   <link href="<c:url value="/resources/img/brand/favicon.png" />" rel="icon" type="image/png">
@@ -126,7 +125,7 @@
           </div>
           <div class="row mt-3">
             <div class="col-6 text-right">
-              <a href="<c:url value="usuarios/cadastro"></c:url>" class="text-light"><small>Create new account</small></a>
+              <a href="<c:url value="usuarios/cadastro"></c:url>" class="text-light"><small>Criar conta</small></a>
             </div>
           </div>
         </div>
