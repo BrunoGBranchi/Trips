@@ -1,5 +1,6 @@
 package br.com.trips.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,11 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Viagem {
+@NamedQueries({@NamedQuery(name="Viagem.validaQR", 
+query="select new br.com.trips.model.Viagem(v.titulo) from Viagem as v left join v.passageiros vp where v.id=?1 and vp.id=?2")})
 
+@Entity
+public class Viagem implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -184,7 +194,12 @@ public class Viagem {
 		this.passageiros = passageiros;
 	}
 
-	public Viagem() {
+	public Viagem(String titulo) {
+		super();
+		this.titulo = titulo;
+	}
 
+	public Viagem() {
+		super();
 	}
 }

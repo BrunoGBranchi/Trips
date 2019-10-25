@@ -27,8 +27,8 @@
 	src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
 <title>Cadastro Usuarios</title>
 </head>
-
 <body>
+<c:import url="../headers/header.jsp"></c:import>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">

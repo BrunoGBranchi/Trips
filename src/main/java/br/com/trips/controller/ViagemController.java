@@ -26,7 +26,6 @@ import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
-import br.com.trips.service.QRCodeService;
 import br.com.trips.service.ViagemService;
 import net.sf.jasperreports.engine.JRException;
 
@@ -42,9 +41,6 @@ public class ViagemController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private QRCodeService qrCodeService;
 	
 	@GetMapping({"/", "/listar", ""})
 	public String listar() {
@@ -64,6 +60,16 @@ public class ViagemController {
 	@RequestMapping(path = "/mostrarQR")
 	public String mostrarQR() {
 		return "viagens/mostrarQRcode";
+	}
+	
+	@RequestMapping(path = "/confirmado")
+	public String confirmadoQR() {
+		return "viagens/confirmado";
+	}
+	
+	@RequestMapping(path = "/naoConfirmado")
+	public String naoConfirmadoQR() {
+		return "viagens/naoConfirmado";
 	}
 	
 	@PostMapping({"/salvar"})
@@ -127,10 +133,13 @@ public class ViagemController {
 		valor1 = s[0];
 		valor2 = s[1];
 	
-		System.out.println(viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)));
+		if (viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)) != null) {
+			return "viagens/confirmado";
+		} else {
+			return "viagens/naoConfirmado";
+		}
 		
 		
-		return "viagens/leituraQRcode";
 	}
 	
 }
