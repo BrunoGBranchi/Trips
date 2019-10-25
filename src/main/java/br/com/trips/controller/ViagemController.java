@@ -121,17 +121,15 @@ public class ViagemController {
 	
 	@PostMapping({"/validaQR"})
 	public String submitQR(QR qr) {
-		System.out.println("Teste: " + qr.getValores());
 		String[] s = qr.getValores().split(Pattern.quote(","));
 		String valor1;
 		String valor2;
-		System.out.println(s);
-		for (int i = 0; i < s.length; i++) {
-			valor1 = s[i];
-			valor2 = s[i++];
-			System.out.println(valor1);
-			System.out.println(valor2);
-		}
+		valor1 = s[0];
+		valor2 = s[1];
+	
+		System.out.println(viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)));
+		
+		
 		return "viagens/leituraQRcode";
 	}
 	
