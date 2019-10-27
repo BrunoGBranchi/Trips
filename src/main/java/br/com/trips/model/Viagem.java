@@ -18,9 +18,6 @@ query="select new br.com.trips.model.Viagem(v.titulo) from Viagem as v left join
 @Entity
 public class Viagem implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
