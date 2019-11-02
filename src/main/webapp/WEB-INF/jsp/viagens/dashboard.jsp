@@ -1,18 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <!-- Icons -->
-  <link href="<c:url value="/resources/js/plugins/nucleo/css/nucleo.css"/>" rel="stylesheet" />
-  <link href="<c:url value="/resources/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"/>"rel="stylesheet" />
-  <!-- CSS Files -->
-  <link href="<c:url value="/resources/css/argon-dashboard.css?v=1.1.0"/>" rel="stylesheet" />
-<title>Listagem viagens</title>
+<meta charset="UTF-8">
+<title>Painel de controle de viagens</title>
 </head>
 <body>
 <c:import url="../headers/header.jsp"></c:import>
@@ -21,7 +14,7 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Minhas viagens</h3>
+              <h3 class="mb-0">Pacotes cadastrados pela empresa</h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">

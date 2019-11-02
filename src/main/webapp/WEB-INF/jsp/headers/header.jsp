@@ -85,7 +85,7 @@
         <ul class="navbar-nav">
          <sec:authorize access="hasRole('ADM_SISTEMA')">
         <li class="nav-item">
-            <a class="nav-link " href="<c:url value="/usuarios/dashboard"></c:url>">
+            <a class="nav-link " href="<c:url value="/viagens/dashboard"></c:url>">
               <i class="ni ni-tv-2 text-primary"></i> Painel de controle
             </a>
           </li>
@@ -193,7 +193,7 @@
          	Você não está logado!
          </li>
          <li class="text-center" style="padding: 20px;">
-         	<a href="<c:url value="login/entrar"></c:url>"><button class="btn-lg btn-block btn-primary">Entrar</button></a>
+         	<a href="<c:url value="/login"></c:url>"><button class="btn-lg btn-block btn-primary">Entrar</button></a>
          </li>
          <li class="text-center">
          	<h4>OU</h4>

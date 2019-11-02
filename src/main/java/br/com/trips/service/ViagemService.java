@@ -3,11 +3,14 @@ package br.com.trips.service;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -41,7 +44,7 @@ public class ViagemService {
 	@Autowired
 	private QRCodeService qrCodeService;
 
-	public void load(Long id, HttpServletResponse response, Principal principal) throws JRException, IOException {
+	public void geraComprovantePassageiro(Long id, HttpServletResponse response, Principal principal) throws JRException, IOException {
 
 		Map<String, Object> v = new HashMap<>();
 
@@ -71,6 +74,51 @@ public class ViagemService {
 			final OutputStream outStream = response.getOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 
+		}
+	}
+	
+	public void geraListaPassageiros(Long id, HttpServletResponse response, Principal principal) throws JRException, IOException {
+
+		Map<String, Object> v = new HashMap<>();
+
+		Optional<Viagem> findById = viagemRepository.findById(id);
+		Usuario findUsuario = usuarioRepository.findByLogin(principal.getName());
+		List<Usuario> passageiros = new ArrayList<>(findById.get().getPassageiros());
+		if (findById.isPresent()) {
+			
+			v.put("viagem", findById.get());
+			v.put("passageiros", passageiros);
+			
+			InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/listaPassageiros.jrxml");
+
+			JasperReport compilado = JasperCompileManager.compileReport(jasperStream);
+
+			JasperPrint jasperPrint = JasperFillManager.fillReport(compilado, v);
+
+			response.setContentType("application/pdf");
+
+			response.setHeader("Content-Disposition", "inline; filename=comprovante.pdf");
+
+			final OutputStream outStream = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+
+		}
+	}
+	
+	public void downloadRoteiro(Long id, HttpServletResponse response) throws JRException, IOException {
+
+		Optional<Viagem> findById = viagemRepository.findById(id);
+		if (findById.isPresent()) {
+
+			byte[] decodeBase64 = Base64.decodeBase64(findById.get().getRoteiro());
+			
+			response.setContentType("application/pdf");
+
+			response.setHeader("Content-Disposition", "attachment; filename=roteiro.pdf");
+
+			final OutputStream outStream = response.getOutputStream();
+			outStream.write(decodeBase64);
+			outStream.flush();
 		}
 	}
 

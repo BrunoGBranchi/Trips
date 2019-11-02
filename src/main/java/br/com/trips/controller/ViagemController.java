@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trips.model.Imagens;
 import br.com.trips.model.QR;
+import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
@@ -43,7 +45,9 @@ public class ViagemController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping({"/", "/listar", ""})
-	public String listar() {
+	public String listar(Model model, Authentication auth) {
+		Usuario u = usuarioRepository.findByLogin(auth.getName());
+		model.addAttribute("viagensPassageiro", viagemDao.findByPassageiro(u.getId()));
 		return "viagens/listar";
 	}
 	
@@ -72,6 +76,11 @@ public class ViagemController {
 		return "viagens/naoConfirmado";
 	}
 	
+	@RequestMapping(path = "/dashboard")
+	public String dashboard() {
+		return "viagens/dashboard";
+	}
+	
 	@PostMapping({"/salvar"})
 	public String salvar(MultipartFile[] imagensFile, MultipartFile roteiroFile, Model model, Viagem viagem) throws IOException {
 		List<Imagens> listaImagens = new ArrayList<Imagens>();
@@ -88,6 +97,15 @@ public class ViagemController {
 		viagemDao.saveAndFlush(viagem);
 		
 		return "redirect:adicionar";
+	}
+	
+	@RequestMapping(path = "/excluirPassageiro/{id}")
+	public String excluirPassageiro(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
+		Usuario u = usuarioRepository.findByLogin(auth.getName());
+		Optional<Viagem> v = viagemDao.findById(id);
+		List<Usuario> passageiros = new ArrayList<Usuario>(v.get().getPassageiros());
+		passageiros.remove(u);
+		return "viagens/listar";
 	}
 	
 	@RequestMapping(path = "/detalhes/{id}")
@@ -121,7 +139,7 @@ public class ViagemController {
 		viagem.setVisitacoes(v.get().getVisitacoes());
 		viagem.setPassageiros(passageiros);
 		viagemDao.saveAndFlush(viagem);
-		viagemService.load(id, response, principal);
+		viagemService.geraComprovantePassageiro(id, response, principal);
 		return "redirect:viagens/detalhes";
 	}
 	
@@ -138,8 +156,13 @@ public class ViagemController {
 		} else {
 			return "viagens/naoConfirmado";
 		}
-		
-		
 	}
+	
+	@RequestMapping(path="/downloadRoteiro/{id}")
+	public String downloadRoteiro(@PathVariable(value = "id") Long id, HttpServletResponse response) throws JRException, IOException {
+		viagemService.downloadRoteiro(id, response);
+		return "viagens/listar";
+	}
+	
 	
 }

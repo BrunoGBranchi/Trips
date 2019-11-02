@@ -13,7 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @NamedQueries({@NamedQuery(name="Viagem.validaQR", 
-query="select new br.com.trips.model.Viagem(v.titulo) from Viagem as v left join v.passageiros vp where v.id=?1 and vp.id=?2")})
+query="select new br.com.trips.model.Viagem(v.titulo) from Viagem as v left join v.passageiros vp where v.id=?1 and vp.id=?2"),
+	
+@NamedQuery(name="Viagem.findByPassageiro", 
+query="select new br.com.trips.model.Viagem(v.id,v.titulo,v.data_saida,v.hora_saida,v.origem,v.valor,v.roteiro) from Viagem as v left join v.passageiros vp where vp.id=?1")})
 
 @Entity
 public class Viagem implements Serializable{
@@ -194,6 +197,18 @@ public class Viagem implements Serializable{
 	public Viagem(String titulo) {
 		super();
 		this.titulo = titulo;
+	}
+
+	public Viagem(Long id, String titulo, String data_saida, String hora_saida, String origem, String valor,
+			String roteiro) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.data_saida = data_saida;
+		this.hora_saida = hora_saida;
+		this.origem = origem;
+		this.valor = valor;
+		this.roteiro = roteiro;
 	}
 
 	public Viagem() {

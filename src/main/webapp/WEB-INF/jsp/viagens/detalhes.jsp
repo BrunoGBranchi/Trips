@@ -20,6 +20,7 @@
 <title>Detalhes viagem</title>
 </head>
 <body>
+<c:import url="../headers/header.jsp"></c:import>
 <div class="container">
     <div class="card">
         <div class="container-fliud">
@@ -87,7 +88,7 @@
                     </div>
                     <div class="text-center">
                         <a href="<c:url value = "/viagens/adicionaPassageiro/${detalhes.id}"/>">
-                        	<button class="add-to-cart btn btn-secondary" type="button" style="margin-top: 20px;"><i class="fas fa-cart-plus"></i> Comprar</button>
+                        	<button class="add-to-cart btn btn-success" type="button" style="margin-top: 20px;"><i class="fas fa-cart-plus"></i> Comprar</button>
                         </a>
                     </div>
                 </div>
