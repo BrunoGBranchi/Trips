@@ -194,6 +194,8 @@ public class Viagem implements Serializable{
 		this.passageiros = passageiros;
 	}
 
+	
+
 	public Viagem(String titulo) {
 		super();
 		this.titulo = titulo;

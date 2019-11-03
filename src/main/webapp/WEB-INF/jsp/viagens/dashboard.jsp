@@ -24,20 +24,20 @@
                     <th scope="col">Data e hora de Saida</th>
                     <th scope="col">Local de embarque</th>
                     <th scope="col">Valor</th>
-                    <th scope="col">Baixar roteiro</th>
-                    <th scope="col">Desistir</th>
+                    <th scope="col">Lista de passageiros</th>
+                    <th scope="col">Excluir</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <c:forEach var="v" items="${viagensPassageiro}">
+                  <c:forEach var="v" items="${viagens}">
                   <tr>
                   	<th scope="row" hidden>${v.id}</th>
                     <th scope="row">${v.titulo}</th>
                     <th scope="row">${v.data_saida} às ${v.hora_saida}</th>
                     <th scope="row">${v.origem}</th>
                     <th scope="row">${v.valor}</th>
-                    <th scope="row"><a class="nav-link" href="<c:url value = "/viagens/downloadRoteiro/${v.id}"/>"><i class="fas fa-download text-success"></i></a></th>
-                    <th scope="row"><a class="nav-link" href="<c:url value = "/viagens/excluirPassageiro/${v.id}"/>"><i class="fas fa-times text-danger"></i></a></th>
+                    <th scope="row"><a class="nav-link" href="<c:url value = "/viagens/emitirLista/${v.id}"/>"><i class="fas fa-list text-success"></i></a></th>
+                    <th scope="row"><a class="nav-link" href="<c:url value = "/viagens/excluir/${v.id}"/>"><i class="fas fa-times text-danger"></i></a></th>
                     
                   </tr>
                   </c:forEach>

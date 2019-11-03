@@ -97,6 +97,13 @@
             </a>
           </li>
         </sec:authorize>
+                <sec:authorize access="hasRole('ADM_SISTEMA')">
+        <li class="nav-item">
+            <a class="nav-link " href="<c:url value="/viagens/lerQR"></c:url>">
+              <i class="fas fa-qrcode text-purple"></i> Escanear QR Code
+            </a>
+          </li>
+        </sec:authorize>
           <li class="nav-item"  class="active">
           <a class=" nav-link active " href="<c:url value="viagens/listar"></c:url>"> <i class="ni ni-bullet-list-67 text-primary"></i> Lista de viagens
             </a>

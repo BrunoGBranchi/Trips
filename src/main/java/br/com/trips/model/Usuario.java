@@ -255,6 +255,6 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + "]";
 	}
-
+	
 	
 }

@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trips.model.Imagens;
 import br.com.trips.model.QR;
-import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
@@ -77,7 +76,8 @@ public class ViagemController {
 	}
 	
 	@RequestMapping(path = "/dashboard")
-	public String dashboard() {
+	public String dashboard(Model model) {
+		model.addAttribute("viagens", viagemDao.findAll());
 		return "viagens/dashboard";
 	}
 	
@@ -97,6 +97,12 @@ public class ViagemController {
 		viagemDao.saveAndFlush(viagem);
 		
 		return "redirect:adicionar";
+	}
+	
+	@RequestMapping(path = "/excluir/{id}")
+	public String excluir(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
+		viagemDao.deleteById(id);
+		return "viagens/listar";
 	}
 	
 	@RequestMapping(path = "/excluirPassageiro/{id}")
@@ -164,5 +170,10 @@ public class ViagemController {
 		return "viagens/listar";
 	}
 	
+	@RequestMapping(path = "/emitirLista/{id}")
+	public String emitirLista(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
+		
+		return "viagens/listar";
+	}
 	
 }
