@@ -171,8 +171,8 @@ public class ViagemController {
 	}
 	
 	@RequestMapping(path = "/emitirLista/{id}")
-	public String emitirLista(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
-		
+	public String emitirLista(@PathVariable(value = "id") Long id, HttpServletResponse response, Viagem viagem) throws JRException, IOException {
+		viagemService.geraListaPassageiros(id, response);
 		return "viagens/listar";
 	}
 	

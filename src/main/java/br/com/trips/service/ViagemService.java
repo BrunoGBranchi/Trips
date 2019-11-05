@@ -31,6 +31,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class ViagemService {
@@ -77,23 +78,23 @@ public class ViagemService {
 		}
 	}
 	
-	public void geraListaPassageiros(Long id, HttpServletResponse response, Principal principal) throws JRException, IOException {
+	public void geraListaPassageiros(Long id, HttpServletResponse response) throws JRException, IOException {
 
 		Map<String, Object> v = new HashMap<>();
 
 		Optional<Viagem> findById = viagemRepository.findById(id);
-		Usuario findUsuario = usuarioRepository.findByLogin(principal.getName());
+		//Usuario findUsuario = usuarioRepository.findByLogin(principal.getName());
 		List<Usuario> passageiros = new ArrayList<>(findById.get().getPassageiros());
 		if (findById.isPresent()) {
 			
 			v.put("viagem", findById.get());
 			v.put("passageiros", passageiros);
 			
-			InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/listaPassageiros.jrxml");
+			InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/Blank_A4.jrxml");
 
 			JasperReport compilado = JasperCompileManager.compileReport(jasperStream);
 
-			JasperPrint jasperPrint = JasperFillManager.fillReport(compilado, v);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(compilado, v, new JRBeanCollectionDataSource(passageiros));
 
 			response.setContentType("application/pdf");
 
