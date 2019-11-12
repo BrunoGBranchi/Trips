@@ -106,11 +106,11 @@ public class ViagemController {
 	}
 	
 	@RequestMapping(path = "/excluirPassageiro/{id}")
-	public String excluirPassageiro(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
+	public String excluirPassageiro(@PathVariable(value = "id") Long id, Authentication auth) {
 		Usuario u = usuarioRepository.findByLogin(auth.getName());
 		Optional<Viagem> v = viagemDao.findById(id);
-		List<Usuario> passageiros = new ArrayList<Usuario>(v.get().getPassageiros());
-		passageiros.remove(u);
+		v.get().getPassageiros().removeIf(p->p.getId().equals(u.getId()));
+		viagemDao.saveAndFlush(v.get());
 		return "viagens/listar";
 	}
 	
