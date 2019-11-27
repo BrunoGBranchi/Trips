@@ -162,18 +162,7 @@
 								placeholder="Casa/Ap 101" required value="casa"/>
 						</div>
 					</div>
-					<br> 
-					
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Avatar: </label>
-						<div class="col-sm-10">
-							<input class="form-control" type="file" name="file"
-								placeholder="Escolha um arquivo"/>
-						</div>
-					</div>
-					<br>
-					
-					
+					<br> 					
 					<div class="form-group">
 						<button class="btn btn-success" type="submit">Cadastrar</button>
 					</div>

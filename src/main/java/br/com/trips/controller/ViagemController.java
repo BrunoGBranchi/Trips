@@ -156,12 +156,15 @@ public class ViagemController {
 		String valor2;
 		valor1 = s[0];
 		valor2 = s[1];
-	
-		if (viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)) != null) {
-			return "viagens/confirmado";
-		} else {
+		if (valor1 == null || valor2 == null) {
 			return "viagens/naoConfirmado";
-		}
+		} else {
+			if (viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)) != null) {
+				return "viagens/confirmado";
+			} else {
+				return "viagens/naoConfirmado";
+			}
+		}		
 	}
 	
 	@RequestMapping(path="/downloadRoteiro/{id}")

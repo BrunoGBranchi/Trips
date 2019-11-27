@@ -50,9 +50,5 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManagerBean();
     }
-	
-    public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("123"));
-	}
     
 }

@@ -167,7 +167,7 @@
 	            <i class="fa fa-dollar"></i>
 	          </div>
 	        </div> 
-	        <input id="valor" name="valor" placeholder="Valor em R$" type="text" aria-describedby="valorHelpBlock" required="required" class="form-control">
+	        <input id="valor" name="valor" placeholder="Valor em R$" type="text" aria-describedby="valorHelpBlock" required="required" class="form-control money2">
 	      </div> 
 	      <span id="valorHelpBlock" class="form-text text-muted">Valor por pessoa</span>
 	    </div>
@@ -214,7 +214,7 @@
 	src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.js"/>"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="<c:url value='/resources/js/jquery.maskedinput.min.js'/>"></script>
+<script src="<c:url value='/resources/js/jquery.mask.js'/>"></script>
 <script type="text/javascript">
 jQuery(function($) {
 	$("#data_saida").mask("99/99/9999");
@@ -222,7 +222,7 @@ jQuery(function($) {
 	$("#hora_saida").mask("99:99");
 	$("#hora_retorno").mask("99:99");
 	$("#hora_chegada").mask("99:99");
-	$("#valor").mask("#.##0,00", {reverse: true});
+	$('.money2').mask("#.##0,00", {reverse: true});
 });
 </script>
 </body>

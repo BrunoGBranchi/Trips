@@ -32,13 +32,10 @@ public class IndexController {
 	
 	@GetMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
-		//model.addAttribute("IDusuario", usuarioDao.findByLogin(principal.getName()));
 		model.addAttribute("viagens", viagemRepository.findAll());
-		
 		for(Viagem list : viagemRepository.findAll()){  
 	        model.addAttribute("imgviagem", list.getImagens().get(0).getImagem());
 	 }  
-		
 		return "index/index";
 	}
 	
@@ -46,7 +43,6 @@ public class IndexController {
 	public String delete(@PathVariable(value = "id") Long id) {
 		usuarioDao.deleteById(id);
 		return "redirect:/login/entrar";
-
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

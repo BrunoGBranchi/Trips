@@ -84,7 +84,7 @@
                     <div class="card text-center">
                          <div class="card-title"><span class="glyphicon glyphicon-credit-card"></span>  Valor:</div>
                         <hr>
-                         <h2><font color="#4287f5">${detalhes.valor}</font></h2> 
+                         <h2><font color="#4287f5">R$ ${detalhes.valor}</font></h2> 
                     </div>
                     <div class="text-center">
                         <a href="<c:url value = "/viagens/adicionaPassageiro/${detalhes.id}"/>">

@@ -35,13 +35,16 @@ public class UsuarioController {
 		return "usuarios/mostrar";
 	}
 
-	// Testar
 	@RequestMapping(path = "/enviar", method = RequestMethod.POST)
 	public String salvar(Model model, Usuario usuario, MultipartFile file) throws IOException {
 		// Salva usuario;
 		List<Roles> roles = new ArrayList<Roles>();
 		List<Imagens> imagens = new ArrayList<Imagens>();
-		roles.add(Roles.ADM_SISTEMA);
+		if (usuarioDao.count() == 0) {
+			roles.add(Roles.ADM_SISTEMA);
+		} else {
+			roles.add(Roles.CLIENTE);
+		}
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
