@@ -102,7 +102,7 @@ public class ViagemController {
 	@RequestMapping(path = "/excluir/{id}")
 	public String excluir(@PathVariable(value = "id") Long id, Authentication auth, Viagem viagem) {
 		viagemDao.deleteById(id);
-		return "viagens/listar";
+		return "viagens/dashboard";
 	}
 	
 	@RequestMapping(path = "/excluirPassageiro/{id}")
@@ -126,7 +126,7 @@ public class ViagemController {
 	public String adicionaPassageiro(@PathVariable(value = "id") Long id, Model model, Principal principal, Viagem viagem, HttpServletResponse response) throws JRException, SQLException, IOException  {
 		Usuario u = usuarioRepository.findByLogin(principal.getName());
 		Optional<Viagem> v = viagemDao.findById(id);
-		List<Usuario> passageiros = new ArrayList<Usuario>();
+		List<Usuario> passageiros = v.get().getPassageiros();
 		passageiros.add(u);
 		viagem.setData_retorno(v.get().getData_retorno());
 		viagem.setData_saida(v.get().getData_saida());

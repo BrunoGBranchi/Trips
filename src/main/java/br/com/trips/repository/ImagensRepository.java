@@ -6,6 +6,4 @@ import br.com.trips.model.Imagens;
 
 public interface ImagensRepository extends JpaRepository<Imagens, Long> {
 	
-	
-	
 }

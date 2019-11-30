@@ -1,6 +1,8 @@
 package br.com.trips.controller;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.trips.model.Imagens;
 import br.com.trips.model.Viagem;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
@@ -33,9 +36,11 @@ public class IndexController {
 	@GetMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
 		model.addAttribute("viagens", viagemRepository.findAll());
-		for(Viagem list : viagemRepository.findAll()){  
-	        model.addAttribute("imgviagem", list.getImagens().get(0).getImagem());
-	 }  
+		for(Viagem list : viagemRepository.findAll()){
+			Optional <Viagem> v = viagemRepository.findById(list.getId());
+			List<Imagens> img = v.get().getImagens();
+	        model.addAttribute("imgviagem", img.get(0).getImagem());
+	 }
 		return "index/index";
 	}
 	
