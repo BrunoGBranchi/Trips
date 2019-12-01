@@ -105,7 +105,7 @@
           </li>
         </sec:authorize>
           <li class="nav-item"  class="active">
-          <a class=" nav-link active " href="<c:url value="viagens/listar"></c:url>"> <i class="ni ni-bullet-list-67 text-primary"></i> Lista de viagens
+          <a class=" nav-link active " href="<c:url value="/viagens/listar"></c:url>"> <i class="ni ni-bullet-list-67 text-primary"></i> Lista de viagens
             </a>
           </li>
           <li class="nav-item">

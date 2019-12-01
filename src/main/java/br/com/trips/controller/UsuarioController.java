@@ -60,7 +60,6 @@ public class UsuarioController {
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
-		
 		usuario.calculaIdade();
 		
 		usuarioDao.saveAndFlush(usuario);
