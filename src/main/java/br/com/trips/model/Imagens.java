@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Imagens {
@@ -14,6 +15,9 @@ public class Imagens {
 		
 	@Lob
 	private String imagem;
+	
+	@ManyToOne
+	private Viagem viagem;
 
 	public Long getId() {
 		return id;
@@ -31,15 +35,30 @@ public class Imagens {
 		this.imagem = imagem;
 	}
 
-	public Imagens(String imagem) {
+	public Viagem getViagem() {
+		return viagem;
+	}
+
+	public void setViagem(Viagem viagem) {
+		this.viagem = viagem;
+	}
+	
+	public Imagens(Long id, String imagem, Viagem viagem) {
+		super();
+		this.id = id;
+		this.imagem = imagem;
+		this.viagem = viagem;
+	}
+	
+	public Imagens(String imagem, Viagem viagem) {
 		super();
 		this.imagem = imagem;
+		this.viagem = viagem;
 	}
 
 	public Imagens() {
 	
 	}
-	
 	
 	
 }

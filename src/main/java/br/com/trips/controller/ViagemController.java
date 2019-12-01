@@ -87,7 +87,7 @@ public class ViagemController {
 		for (MultipartFile f : imagensFile) {
 			System.out.println(f);
 			 String stArquivo = Base64.getEncoder().encodeToString(f.getBytes());
-			 Imagens img = new Imagens(stArquivo);
+			 Imagens img = new Imagens(stArquivo, viagem);
 			 listaImagens.add(img);
 			 
 		}

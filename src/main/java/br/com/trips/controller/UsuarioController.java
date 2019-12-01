@@ -39,7 +39,6 @@ public class UsuarioController {
 	public String salvar(Model model, Usuario usuario, MultipartFile file) throws IOException {
 		// Salva usuario;
 		List<Roles> roles = new ArrayList<Roles>();
-		List<Imagens> imagens = new ArrayList<Imagens>();
 		if (usuarioDao.count() == 0) {
 			roles.add(Roles.ADM_SISTEMA);
 		} else {
@@ -49,11 +48,6 @@ public class UsuarioController {
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
 		usuario.calculaIdade();
-
-		String img = Base64.getEncoder().encodeToString(file.getBytes());
-		Imagens imagem = new Imagens(img);
-		imagens.add(imagem);
-		usuario.setImgPerfil(imagens);
 		
 		usuarioDao.saveAndFlush(usuario);
 		model.addAttribute("usuarios", usuarioDao.findAll());

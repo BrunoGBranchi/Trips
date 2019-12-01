@@ -29,8 +29,12 @@
 	            <div class="list-group-item clearfix">
 	                <div class="profile-teaser-left">
 	                    <div class="profile-img">
-	                        <img src="data:image/jpg;base64,${imgviagem}">
+	                    <c:forEach var="img" varStatus="status" items="${viagem.imagens}">
+	                        <c:if test="${status.first}"><img src="data:image/jpg;base64,${img.imagem}"></c:if>
+	                        
+	                    </c:forEach>
 	                    </div>
+	                    
 	                </div>
 	                <div class="profile-teaser-main">
 	                     <h2 class="profile-name">${viagem.titulo}</h2>

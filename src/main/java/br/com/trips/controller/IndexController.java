@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.trips.model.Imagens;
 import br.com.trips.model.Viagem;
+import br.com.trips.repository.ImagensRepository;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
 
@@ -33,13 +34,19 @@ public class IndexController {
 	@Autowired
 	private ViagemRepository viagemRepository;
 	
+	@Autowired
+	private ImagensRepository imagensRepository;
+	
 	@GetMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
-		model.addAttribute("viagens", viagemRepository.findAll());
+		List<Viagem> v = viagemRepository.findAll();
+		model.addAttribute("viagens", v);
+		//model.addAttribute("imgviagem", imagensRepository.findByViagem(v));
 		for(Viagem list : viagemRepository.findAll()){
-			Optional <Viagem> v = viagemRepository.findById(list.getId());
-			List<Imagens> img = v.get().getImagens();
-	        model.addAttribute("imgviagem", img.get(0).getImagem());
+			List<Imagens> img = imagensRepository.findByViagem(list);
+			Imagens imagem = img.get(0);
+			
+			
 	 }
 		return "index/index";
 	}
