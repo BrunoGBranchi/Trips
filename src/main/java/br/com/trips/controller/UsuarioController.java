@@ -2,17 +2,19 @@ package br.com.trips.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.trips.model.Imagens;
 import br.com.trips.model.Roles;
 import br.com.trips.model.Usuario;
 import br.com.trips.repository.UsuarioRepository;
@@ -23,12 +25,23 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioDao;
-
+	private boolean salvo = false;
 	@RequestMapping(path = { "/cadastro", "/", "" })
-	public String cadastro() {
+	public String cadastro(Model model) {
+		if (salvo == true) {
+			model.addAttribute("aviso", "Alterações salvas com sucesso!");
+		}
 		return "usuarios/cadastro";
 	}
-
+	
+	@GetMapping(path = { "/perfil"})
+	public String perfil(Model model, Authentication auth) {
+		Usuario u = usuarioDao.findByLogin(auth.getName());
+		Optional<Usuario> user = usuarioDao.findById(u.getId());
+		model.addAttribute("usuario", user.get());
+		return "usuarios/perfil";
+	}
+	
 	@RequestMapping(path = { "/mostrar" })
 	public String mostrar(Model model) {
 		model.addAttribute("usuarios", usuarioDao.findAll());
@@ -47,6 +60,7 @@ public class UsuarioController {
 		usuario.setRoles(roles);
 		usuario.setAtivo(true);
 		usuario.criptografarSenha();
+		
 		usuario.calculaIdade();
 		
 		usuarioDao.saveAndFlush(usuario);
@@ -64,5 +78,18 @@ public class UsuarioController {
 		return "redirect:/index/index";
 
 	}
+	
+	@RequestMapping(path = "/salvarEditado", method = RequestMethod.POST)
+	public String editando(Usuario usuario, Model model) {
+		//usuario.setRoles(usuario.getRoles());
+		//usuario.setAtivo(true);
+		//usuario.criptografarSenha();
+		//usuario.calculaIdade();
+		//salvo = true;
+		//usuarioDao.saveAndFlush(usuario);
+		return "redirect:/usuarios/perfil";
+	}
+
+	
 
 }

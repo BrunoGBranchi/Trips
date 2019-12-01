@@ -2,8 +2,6 @@ package br.com.trips.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.trips.model.Imagens;
 import br.com.trips.model.Viagem;
-import br.com.trips.repository.ImagensRepository;
 import br.com.trips.repository.UsuarioRepository;
 import br.com.trips.repository.ViagemRepository;
 
@@ -34,20 +30,10 @@ public class IndexController {
 	@Autowired
 	private ViagemRepository viagemRepository;
 	
-	@Autowired
-	private ImagensRepository imagensRepository;
-	
 	@GetMapping(path = { "", "/" })
 	public String index(Model model, Principal principal, Authentication auth) {
 		List<Viagem> v = viagemRepository.findAll();
 		model.addAttribute("viagens", v);
-		//model.addAttribute("imgviagem", imagensRepository.findByViagem(v));
-		for(Viagem list : viagemRepository.findAll()){
-			List<Imagens> img = imagensRepository.findByViagem(list);
-			Imagens imagem = img.get(0);
-			
-			
-	 }
 		return "index/index";
 	}
 	

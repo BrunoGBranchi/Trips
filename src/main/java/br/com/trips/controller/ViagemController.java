@@ -47,6 +47,7 @@ public class ViagemController {
 	public String listar(Model model, Authentication auth) {
 		Usuario u = usuarioRepository.findByLogin(auth.getName());
 		model.addAttribute("viagensPassageiro", viagemDao.findByPassageiro(u.getId()));
+		viagemDao.findByPassageiro(u.getId());
 		return "viagens/listar";
 	}
 	
