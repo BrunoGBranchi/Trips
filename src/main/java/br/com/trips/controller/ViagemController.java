@@ -151,7 +151,7 @@ public class ViagemController {
 	}
 	
 	@PostMapping({"/validaQR"})
-	public String submitQR(QR qr) {
+	public String submitQR(Model model, QR qr) {
 		String[] s = qr.getValores().split(Pattern.quote(","));
 		String valor1;
 		String valor2;
@@ -162,6 +162,10 @@ public class ViagemController {
 				return "viagens/naoConfirmado";
 			} else {
 				if (viagemDao.validaQR(Long.valueOf(valor1), Long.valueOf(valor2)) != null) {
+					Optional<Viagem> v = viagemDao.findById(Long.valueOf(valor1));
+					Optional<Usuario> u = usuarioRepository.findById(Long.valueOf(valor2));
+					model.addAttribute("viagem", v.get());
+					model.addAttribute("passageiro", u.get());
 					return "viagens/confirmado";
 				} else {
 					return "viagens/naoConfirmado";
