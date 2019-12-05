@@ -64,7 +64,7 @@ public class ViagemService {
 
 			response.setContentType("application/pdf");
 
-			response.setHeader("Content-Disposition", "inline; filename=comprovante.pdf");
+			response.setHeader("Content-Disposition", "attachment; filename=comprovante.pdf");
 
 			final OutputStream outStream = response.getOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
@@ -92,7 +92,7 @@ public class ViagemService {
 
 			response.setContentType("application/pdf");
 
-			response.setHeader("Content-Disposition", "inline; filename=comprovante.pdf");
+			response.setHeader("Content-Disposition", "inline; filename=ListaPassageiros.pdf");
 
 			final OutputStream outStream = response.getOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
