@@ -34,6 +34,9 @@ public class IndexController {
 	public String index(Model model, Principal principal, Authentication auth) {
 		List<Viagem> v = viagemRepository.findAll();
 		model.addAttribute("viagens", v);
+		if (v.isEmpty()) {
+			model.addAttribute("avisoCliente", "Nenhum pacote de viagem cadastrado. Para cadastrar, clique aqui!");
+		}
 		return "index/index";
 	}
 	

@@ -95,6 +95,9 @@
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
+            <c:if test="${errorMessge != null}">
+				<div class="alert alert-info" role="alert"><h1 class="text-center text-white">${errorMessge}</h1></div>
+			</c:if>
               <div class="text-center text-muted mb-4">
                 <small>Informe seus dados abaixo</small>
               </div>

@@ -7,6 +7,8 @@
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
 	<field name="rg" class="java.lang.String"/>
+	<field name="emissor" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -34,37 +36,186 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="94" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="71" width="110" height="18" uuid="9b6ae345-d752-42f8-a22c-dc79c51b99f9"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getData_saida()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="54" width="60" height="17" uuid="b3802060-426e-4185-a20e-fb0f08e59247"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data embarque:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="54" width="60" height="17" uuid="4cbefc46-21be-4f12-ac2c-a660edf96dfe"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora embarque:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="71" width="110" height="18" uuid="7c4e4df1-56f3-4d0e-8c9a-c7e220f77536"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getHora_saida()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="245" y="54" width="60" height="17" uuid="63616ce7-5d7c-4f4c-8938-606f5acfc353"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data retorno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="71" width="110" height="18" uuid="c0dc27b0-0e1e-48a4-9e30-ae90550d9776"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getData_retorno()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="350" y="54" width="60" height="17" uuid="2c9d5f5e-9ff2-4ae6-ae6b-6c152cfc447e"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora retorno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="330" y="71" width="110" height="18" uuid="17cfead1-2e84-4c84-a2c3-983ddb8f6f17"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getHora_retorno()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="54" width="60" height="17" uuid="1fc410b0-bc99-476a-9c61-413ec0000838"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Hora chegada:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="71" width="110" height="18" uuid="6f85cfc3-a67d-4a85-a50b-6910afdd3dc3"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getHora_chegada()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="13" width="60" height="17" uuid="517b35a1-6518-4fd5-93ad-10c61f0ac546"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origem]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="110" height="18" uuid="ecf5bc4a-e68a-45d9-afdf-643480b28427"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getOrigem()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="135" y="13" width="60" height="17" uuid="49eabc48-b58d-4461-9017-12050b2ca7ff"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Destino]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="30" width="110" height="18" uuid="71424a89-ba7c-4f4b-9589-1aad4eeb3637"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getDestino()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="245" y="13" width="60" height="17" uuid="e71fa8f1-5bf7-48fd-ae5d-1e13c2807db6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Logradouro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="30" width="110" height="18" uuid="62da1dfe-9a07-4c16-8b0a-535a3e07b846"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{viagem}.getEmbarque()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="35" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="83" y="0" width="197" height="30" uuid="03c0843d-5149-4d1d-856b-7816cc276386">
+				<reportElement x="1" y="0" width="197" height="30" uuid="03c0843d-5149-4d1d-856b-7816cc276386">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c473905c-17e8-4159-86ca-f372c4f4ee46"/>
 				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Nome completo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="0" width="100" height="30" uuid="bac40355-d90a-40ac-8d53-33663eedf477">
+				<reportElement x="218" y="0" width="100" height="30" uuid="bac40355-d90a-40ac-8d53-33663eedf477">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
 				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Numero Identidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="0" width="100" height="30" uuid="bec02780-88fd-49e3-a5fb-96cff0c169ee">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orgão emissor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="27" uuid="b424b138-ce8c-4282-88f7-0add2ae734b9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="45" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="83" y="10" width="197" height="20" uuid="374001cd-173e-422d-93b0-4e2410eb0f22">
+				<reportElement x="1" y="0" width="197" height="20" uuid="374001cd-173e-422d-93b0-4e2410eb0f22">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c473905c-17e8-4159-86ca-f372c4f4ee46"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="330" y="11" width="100" height="19" uuid="53fffac6-72b0-48c2-be86-78da0d7b9e2d">
+				<reportElement x="218" y="1" width="100" height="19" uuid="53fffac6-72b0-48c2-be86-78da0d7b9e2d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="1" width="100" height="19" uuid="fad8ea15-dc54-475a-92a4-33952461dd36">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{emissor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="1" width="100" height="19" uuid="78c67a79-0c7f-4386-8d83-726bec7e0ff2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3fd2c33-900c-46c5-a72b-e2502ec7fbc0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

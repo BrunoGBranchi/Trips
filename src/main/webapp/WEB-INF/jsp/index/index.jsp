@@ -23,6 +23,11 @@
 <body>
 <c:import url="../headers/header.jsp"></c:import>
 <div style="margin-top: 50px;" class="container">
+	<c:if test="${avisoCliente != null}">
+		<div class="alert alert-info" role="alert">
+		<a href="<c:url value = "/viagens/adicionar"/>"><h1 class="text-center text-white">${avisoCliente}</h1></a>
+		</div>
+	</c:if>
     <c:forEach var="viagem" items="${viagens}">
 	    <div class="row">
 	        <div class="list-group">
@@ -42,7 +47,7 @@
 	                        <div class="info"><span class="">Data de saida:</span> ${viagem.data_saida}</div>
 	                        <div class="info"><span class="">Saida de:</span> ${viagem.origem}</div>
 	                        <div class="info"><span class="">Valores inclusos:</span> ${viagem.inclusos}</div>
-	                        <div class="info"><span class="">Preco por pessoa:</span> ${viagem.valor}</div>
+	                        <div class="info"><span class="">Preço por pessoa:</span> R$ ${viagem.valor}</div>
 	                        <div class="position-fixed"><a href="<c:url value = "/viagens/detalhes/${viagem.id}"/>"><button class="btn btn-success btn-lg btn-block"><i class="fas fa-plus"></i> VER MAIS</button></a></div>
 	                    </div>
 	                </div>

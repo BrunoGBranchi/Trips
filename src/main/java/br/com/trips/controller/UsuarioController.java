@@ -28,9 +28,7 @@ public class UsuarioController {
 	private boolean salvo = false;
 	@RequestMapping(path = { "/cadastro", "/", "" })
 	public String cadastro(Model model) {
-		if (salvo == true) {
-			model.addAttribute("aviso", "Alterações salvas com sucesso!");
-		}
+
 		return "usuarios/cadastro";
 	}
 	
@@ -38,6 +36,9 @@ public class UsuarioController {
 	public String perfil(Model model, Authentication auth) {
 		Usuario u = usuarioDao.findByLogin(auth.getName());
 		Optional<Usuario> user = usuarioDao.findById(u.getId());
+		if (salvo == true) {
+			model.addAttribute("aviso", "Alterações salvas com sucesso!");
+		}
 		model.addAttribute("usuario", user.get());
 		return "usuarios/perfil";
 	}
@@ -80,12 +81,12 @@ public class UsuarioController {
 	
 	@RequestMapping(path = "/salvarEditado", method = RequestMethod.POST)
 	public String editando(Usuario usuario, Model model) {
-		//usuario.setRoles(usuario.getRoles());
-		//usuario.setAtivo(true);
-		//usuario.criptografarSenha();
-		//usuario.calculaIdade();
-		//salvo = true;
-		//usuarioDao.saveAndFlush(usuario);
+		usuario.setRoles(usuario.getRoles());
+		usuario.setAtivo(true);
+		usuario.criptografarSenha();
+		usuario.calculaIdade();
+		salvo = true;
+		usuarioDao.saveAndFlush(usuario);
 		return "redirect:/usuarios/perfil";
 	}
 

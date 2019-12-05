@@ -26,6 +26,9 @@
 <c:import url="../headers/header.jsp"></c:import>
 <div class="container">
 	<h2>Cadastrar pacote de viagem</h2>
+	<c:if test="${aviso != null}">
+			<div class="alert alert-success" role="alert"><h1 class="text-center text-white">${aviso}</h1></div>
+	</c:if>
 	<form action='<c:url value="/viagens/salvar"></c:url>' method="POST" enctype="multipart/form-data" >
 	  <div class="form-group row">
 	    <label for="titulo" class="col-4 col-form-label">Titulo:*</label> 

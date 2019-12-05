@@ -15,7 +15,7 @@
   <div class="main-content">
     <!-- Navbar -->
 	<c:if test="${aviso != null}">
-			<div class="alert alert-warning" role="alert">${aviso}</div>
+			<div class="alert alert-success" role="alert"><h1 class="text-center text-white">${aviso}</h1></div>
 	</c:if>
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
@@ -85,8 +85,20 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="login">Email address</label>
+                        <label class="form-control-label" for="login">Email</label>
                         <input type="email" id="login" name="login" class="form-control form-control-alternative" value="${usuario.login}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="login">Senha</label>
+                        <input type="password" id="login" name="senha" class="form-control form-control-alternative" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="login">Confirmar senha</label>
+                        <input type="password" id="login" name="confirmarSenha" class="form-control form-control-alternative" required>
                       </div>
                     </div>
                   </div>

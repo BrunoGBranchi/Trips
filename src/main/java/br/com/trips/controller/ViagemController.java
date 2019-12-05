@@ -43,6 +43,8 @@ public class ViagemController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	private boolean salvo = false;
+	
 	@GetMapping({"/", "/listar", ""})
 	public String listar(Model model, Authentication auth) {
 		Usuario u = usuarioRepository.findByLogin(auth.getName());
@@ -52,7 +54,10 @@ public class ViagemController {
 	}
 	
 	@GetMapping("/adicionar")
-	public String adicionar() {
+	public String adicionar(Model model) {
+		if (salvo == true) {
+			model.addAttribute("aviso", "Pacote cadastrado com sucesso!");
+		}
 		return "viagens/adicionar";
 	}
 	
@@ -95,6 +100,7 @@ public class ViagemController {
 		String roteiro = Base64.getEncoder().encodeToString(roteiroFile.getBytes());
 		viagem.setRoteiro(roteiro);
 		viagem.setImagens(listaImagens);
+		salvo = true;
 		viagemDao.saveAndFlush(viagem);
 		
 		return "redirect:adicionar";
